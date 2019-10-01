@@ -2,26 +2,20 @@ package pl.patrykzygo.todo
 
 import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
-import androidx.test.espresso.matcher.ViewMatchers.assertThat
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import org.hamcrest.CoreMatchers.equalTo
+import junit.framework.Assert.assertEquals
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
-import pl.patrykzygo.todo.database.NotificationType
-import pl.patrykzygo.todo.database.Task
+
 import pl.patrykzygo.todo.database.TaskDatabase
 import pl.patrykzygo.todo.database.TaskDatabaseDao
 import java.io.IOException
-import java.util.concurrent.CountDownLatch
-import java.util.concurrent.TimeUnit
+
 
 @RunWith(AndroidJUnit4::class)
 class TaskDatabaseTest {
@@ -51,34 +45,55 @@ class TaskDatabaseTest {
 
     @Test
     @Throws(Exception::class)
-    fun insertTest(){
-        val task = Task(0,
-            "test",
-            "testDesc",
-            "14-10-2019",
-            false,
-            NotificationType.NOTIFICATION_POPUP,
-            1,
-            "TEST")
-
+    fun insertTaskTest(){
+        val task = createRandomTasks(1)[0]
         taskDao.insert(task)
         val result = taskDao.getAll().blockingObserve()
         assert(result!!.isNotEmpty())
     }
 
-    private fun <T> LiveData<T>.blockingObserve(): T? {
-        var value: T? = null
-        val latch = CountDownLatch(1)
-
-        val observer = Observer<T> { t ->
-            value = t
-            latch.countDown()
-        }
-
-        observeForever(observer)
-
-        latch.await(2, TimeUnit.SECONDS)
-        return value
+    @Test
+    @Throws(Exception::class)
+    fun getTasksTest(){
+        val tasks = createRandomTasks(20)
+        taskDao.insert(*tasks.toTypedArray())
+        val retrievedTasks = taskDao.getAll().blockingObserve()
+        assert(retrievedTasks == tasks.sortedWith(compareBy({it.taskId}, {it.taskId})))
     }
+
+    @Test
+    @Throws(Exception::class)
+    fun deleteAllTest(){
+        val tasks = createRandomTasks(5)
+        taskDao.insert(*tasks.toTypedArray())
+        taskDao.clearAllTasks()
+        val result = taskDao.getAll().blockingObserve()
+        assert(result!!.isEmpty())
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun deleteSpecificTest(){
+        val tasks = createRandomTasks(5)
+        taskDao.insert(*tasks.toTypedArray())
+        val tasksToDelete = listOf(tasks[(0..4).random()], tasks[(0..4).random()])
+        taskDao.deleteTasks(*tasksToDelete.toTypedArray())
+        val result = taskDao.getAll().blockingObserve()
+        assert(tasksToDelete[0] !in result!! && tasksToDelete[1] !in result!!)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun getWithIdTest(){
+        val tasks = createRandomTasks(5)
+        taskDao.insert(*tasks.toTypedArray())
+        val randomId = (0..4).random().toLong()
+        val result = taskDao.getWithId(randomId).blockingObserve()
+        assertEquals(result?.taskId, randomId)
+
+
+    }
+
+
 
 }
