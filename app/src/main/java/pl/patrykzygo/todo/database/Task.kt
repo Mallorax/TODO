@@ -8,6 +8,7 @@ import androidx.room.PrimaryKey
 data class Task (
 
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
     val taskId: Long = 0L,
 
     @ColumnInfo(name = "title")
@@ -31,3 +32,5 @@ data class Task (
     @ColumnInfo(name = "tag")
     var tag: String
 )
+
+
