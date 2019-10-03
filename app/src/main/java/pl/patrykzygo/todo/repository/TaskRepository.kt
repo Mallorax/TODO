@@ -2,13 +2,14 @@ package pl.patrykzygo.todo.repository
 
 import androidx.lifecycle.LiveData
 import pl.patrykzygo.todo.database.TaskEntity
+import pl.patrykzygo.todo.domain.Task
 
 interface TaskRepository {
 
-    fun insertTask(vararg taskEntities: TaskEntity)
-    fun receiveAllTasks():LiveData<List<TaskEntity>>
-    fun getTaskWithId(id: Long):LiveData<TaskEntity>
-    fun deleteSpecificTasks(vararg taskEntities: TaskEntity)
-    fun clearAllTasks()
+    suspend fun insertTask(vararg tasks: Task)
+    suspend fun receiveAllTasks():LiveData<List<Task>>
+    suspend fun getTaskWithId(id: Long):LiveData<Task>
+    suspend fun deleteSpecificTasks(vararg tasks: Task)
+    suspend fun clearAllTasks()
 
 }
