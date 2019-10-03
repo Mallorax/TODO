@@ -20,6 +20,6 @@ interface TaskDatabaseDao {
     fun deleteTasks(vararg tasks: Task)
 
     @Query("DELETE FROM tasks_table")
-    fun clearAllTasks()
+    fun deleteAllTasks()
 
 }

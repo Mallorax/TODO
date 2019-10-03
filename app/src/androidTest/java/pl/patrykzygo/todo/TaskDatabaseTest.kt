@@ -66,7 +66,7 @@ class TaskDatabaseTest {
     fun deleteAllTest(){
         val tasks = createRandomTasks(5)
         taskDao.insert(*tasks.toTypedArray())
-        taskDao.clearAllTasks()
+        taskDao.deleteAllTasks()
         val result = taskDao.getAll().blockingObserve()
         assert(result!!.isEmpty())
     }
