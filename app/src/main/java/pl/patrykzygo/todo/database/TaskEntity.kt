@@ -3,9 +3,12 @@ package pl.patrykzygo.todo.database
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import pl.patrykzygo.todo.domain.Task
+import java.text.DateFormat
+import java.util.*
 
 @Entity(tableName = "tasks_table")
-data class Task (
+data class TaskEntity (
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
@@ -32,5 +35,18 @@ data class Task (
     @ColumnInfo(name = "tag")
     var tag: String
 )
+
+fun TaskEntity.asDomainModel(): Task{
+    return Task(
+        this.taskId,
+        this.title,
+        this.description,
+        DateFormat.getDateInstance().parse(this.date),
+        this.hasNotification,
+        this.notificationType,
+        this.priority,
+        this.tag
+    )
+}
 
 

@@ -18,7 +18,7 @@ import java.io.IOException
 
 
 @RunWith(AndroidJUnit4::class)
-class TaskDatabaseTest {
+class TaskEntityDatabaseTest {
 
 
     @get:Rule val rule = InstantTaskExecutorRule()

@@ -2,7 +2,7 @@ package pl.patrykzygo.todo
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import pl.patrykzygo.todo.database.Task
+import pl.patrykzygo.todo.database.TaskEntity
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import kotlin.random.Random
@@ -22,11 +22,11 @@ fun <T> LiveData<T>.blockingObserve(): T? {
     return value
 }
 
-fun createRandomTasks(count: Int): List<Task>{
-    val tasks = mutableListOf<Task>()
+fun createRandomTasks(count: Int): List<TaskEntity>{
+    val tasks = mutableListOf<TaskEntity>()
     for(x in 1..count){
         tasks.add(
-            Task(
+            TaskEntity(
                 0,
                 getRandomString((0..x).random()),
                 getRandomString((0..x).random()),
