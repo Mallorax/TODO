@@ -17,8 +17,7 @@ class TaskViewModel(application: Application): AndroidViewModel(application) {
     private val viewModelScope = CoroutineScope(viewModelJob + Dispatchers.Main)
     private val database = TaskDatabase.getInstance(application)
     private val repository: TaskRepository = RoomRepositoryImpl(database)
-
-    val tasks = repository.receiveAllTasks()
+    
 
     override fun onCleared() {
         super.onCleared()
