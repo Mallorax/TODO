@@ -5,6 +5,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import pl.patrykzygo.todo.domain.Task
 import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 @Entity(tableName = "tasks_table")
@@ -41,7 +43,7 @@ fun TaskEntity.asDomainModel(): Task{
         this.taskId,
         this.title,
         this.description,
-        DateFormat.getDateInstance().parse(this.date),
+        SimpleDateFormat("dd MM yyyy hh:mm").parse(this.date),
         this.hasNotification,
         this.notificationType,
         this.priority,

@@ -31,7 +31,7 @@ class TaskEntityDatabaseTest {
     fun createDb(){
         val context = ApplicationProvider.getApplicationContext<Context>()
         db = Room.inMemoryDatabaseBuilder(
-            context, TaskDatabase::class.java).build()
+            context, TaskDatabase::class.java).allowMainThreadQueries().build()
         taskDao = db.taskDatabaseDao
     }
 
