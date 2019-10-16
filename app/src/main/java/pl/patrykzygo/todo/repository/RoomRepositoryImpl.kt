@@ -12,7 +12,7 @@ import pl.patrykzygo.todo.domain.toDatabaseEntity
 open class RoomRepositoryImpl(private val db: TaskDatabase): TaskRepository {
 
 
-    open override suspend fun insertTask(vararg tasks: Task) {
+    override suspend fun insertTask(vararg tasks: Task) {
         withContext(Dispatchers.IO){
            db.taskDatabaseDao.insert(
                *tasks.map{

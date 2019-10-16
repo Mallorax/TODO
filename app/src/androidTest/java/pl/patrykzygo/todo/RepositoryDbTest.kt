@@ -16,7 +16,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import pl.patrykzygo.todo.database.TaskDatabase
-import pl.patrykzygo.todo.database.TaskDatabaseDao
 import pl.patrykzygo.todo.database.asDomainModel
 import pl.patrykzygo.todo.repository.RoomRepositoryImpl
 import pl.patrykzygo.todo.repository.TaskRepository
@@ -28,7 +27,8 @@ class RepositoryDbTest {
     @get:Rule
     val rule = InstantTaskExecutorRule()
 
-    lateinit var repo: RoomRepositoryImpl
+    @SpyK
+    private lateinit var repo: TaskRepository
 
     private val testData = createRandomTasks(5)
     lateinit var db: TaskDatabase
@@ -40,7 +40,7 @@ class RepositoryDbTest {
         db = Room.inMemoryDatabaseBuilder(
             context, TaskDatabase::class.java
         ).allowMainThreadQueries().build()
-        repo = RoomRepositoryImpl(db)
+        repo = spyk(RoomRepositoryImpl(db))
     }
 
     @After
@@ -61,17 +61,14 @@ class RepositoryDbTest {
 
     @Test
     fun insertTaskTest() {
-        val sp = spyk(repo)
         val test = testData.map {
             it.asDomainModel()
         }.toTypedArray()
         runBlocking {
-            sp.insertTask(*test)
+            repo.insertTask(*test)
         }
         coVerify{
-            sp.insertTask(*test)
+            repo.insertTask(*test)
         }
-
-
     }
 }
