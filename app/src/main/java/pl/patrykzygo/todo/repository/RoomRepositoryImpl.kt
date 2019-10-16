@@ -9,10 +9,10 @@ import pl.patrykzygo.todo.database.asDomainModel
 import pl.patrykzygo.todo.domain.Task
 import pl.patrykzygo.todo.domain.toDatabaseEntity
 
-class RoomRepositoryImpl(private val db: TaskDatabase): TaskRepository {
+open class RoomRepositoryImpl(private val db: TaskDatabase): TaskRepository {
 
 
-    override suspend fun insertTask(vararg tasks: Task) {
+    open override suspend fun insertTask(vararg tasks: Task) {
         withContext(Dispatchers.IO){
            db.taskDatabaseDao.insert(
                *tasks.map{

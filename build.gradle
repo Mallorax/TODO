@@ -14,6 +14,7 @@ buildscript {
         version_kotlin_coroutines = '1.3.2'
         version_recycler_view = '28.0.0'
         version_material = '1.0.0'
+        version_mockk = '1.9.3'
     }
 
     repositories {
@@ -37,7 +38,14 @@ allprojects {
         jcenter()
         
     }
+
+    configurations.all {
+        resolutionStrategy {
+            force("org.objenesis:objenesis:2.6")
+        }
+    }
 }
+
 
 task clean(type: Delete) {
     delete rootProject.buildDir
