@@ -27,10 +27,10 @@ data class Task(
 
 ){
     override fun equals(other: Any?): Boolean {
-        if (other == null || other !is Task){
-            return false
+        return if (other == null || other !is Task){
+            false
         }else{
-            return  this.title == other.title &&
+            this.title == other.title &&
                     this.description == other.description &&
                     this.date == other.date &&
                     this.hasNotification == other.hasNotification &&
