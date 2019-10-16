@@ -6,6 +6,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import io.mockk.*
+import io.mockk.impl.annotations.MockK
 import io.mockk.impl.annotations.SpyK
 import kotlinx.coroutines.runBlocking
 import org.junit.After
@@ -55,20 +56,26 @@ class RepositoryDbTest {
         val result = runBlocking {
             repo.receiveAllTasks()
         }.blockingObserve()
-        assertEquals(result!![0].title, testData[0].title)
+        assertEquals(result!![4], testData[4].asDomainModel())
 
     }
 
     @Test
+    fun getWithIdTest(){
+        db.taskDatabaseDao.insert(*testData.toTypedArray())
+        val result = runBlocking { repo.getTaskWithId(3).blockingObserve() }
+        assertEquals(3, result!!.taskId)
+    }
+
+
+    @Test
     fun insertTaskTest() {
-        val test = testData.map {
-            it.asDomainModel()
-        }.toTypedArray()
+        val data = testData.map { t -> t.asDomainModel() }.toTypedArray()
         runBlocking {
-            repo.insertTask(*test)
+            repo.insertTask(*data)
         }
         coVerify{
-            repo.insertTask(*test)
+            repo.insertTask(*data)
         }
     }
 }
