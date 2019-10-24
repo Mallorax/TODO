@@ -10,7 +10,6 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -21,10 +20,10 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:text="@{bindedTask.title}"
             app:layout_constraintBottom_toTopOf="@+id/task_tag"
             app:layout_constraintEnd_toStartOf="@+id/task_priority"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/task_date"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="name of task" />
@@ -36,11 +35,26 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            app:task_date="@{bindedTask.date}"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/task_time"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:taskDate="@{bindedTask.date}"
             tools:text="Scheduled date for task" />
+
+        <TextView
+            android:id="@+id/task_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/task_date"
+            app:layout_constraintStart_toStartOf="@+id/task_date"
+            app:layout_constraintTop_toBottomOf="@+id/task_date"
+            app:taskTime="@{bindedTask.date}"
+            tools:text="time" />
 
         <TextView
             android:id="@+id/task_tag"
@@ -52,9 +66,8 @@
             android:layout_marginBottom="8dp"
             android:text="@{bindedTask.tag}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/task_priority"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/task_date"
+            app:layout_constraintEnd_toEndOf="@+id/task_name"
+            app:layout_constraintStart_toStartOf="@+id/task_name"
             app:layout_constraintTop_toBottomOf="@+id/task_name"
             tools:text="Task's tag" />
 
@@ -65,10 +78,12 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:text="@{bindedTask.priority}"
+            android:lines="2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:taskPriority="@{bindedTask}"
+            tools:text="5" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

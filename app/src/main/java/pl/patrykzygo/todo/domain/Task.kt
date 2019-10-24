@@ -15,7 +15,7 @@ data class Task(
 
     var description: String,
 
-    var date: Date,
+    var date: Calendar,
 
     var hasNotification: Boolean,
 
@@ -46,7 +46,7 @@ fun Task.toDatabaseEntity():TaskEntity{
         this.taskId,
         this.title,
         this.description,
-        DateFormat.getInstance().format(date),
+        DateFormat.getInstance().format(date.time),
         this.hasNotification,
         this.notificationType,
         this.priority,

@@ -3,13 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
+    android:label="List of tasks"
     app:startDestination="@id/tasksListFragment">
 
     <fragment
         android:id="@+id/tasksListFragment"
         android:name="pl.patrykzygo.todo.ui.TasksListFragment"
-        android:label="tasks_list_fragment"
+        android:label="List of tasks"
         tools:layout="@layout/tasks_list_fragment">
+
     </fragment>
 
 </navigation>

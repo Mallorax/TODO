@@ -1,14 +1,12 @@
 package pl.patrykzygo.todo.ui
 
-import android.content.DialogInterface
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import pl.patrykzygo.todo.R
 import pl.patrykzygo.todo.databinding.TaskListItemBinding
-import pl.patrykzygo.todo.databinding.TasksListFragmentBinding
 import pl.patrykzygo.todo.domain.Task
 
 class TasksListAdapter(private val onClickListener: OnClickListener): ListAdapter<Task, TasksListAdapter.TaskViewHolder>(DiffCallback) {
@@ -37,6 +35,8 @@ class TasksListAdapter(private val onClickListener: OnClickListener): ListAdapte
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         return TaskViewHolder(TaskListItemBinding.inflate(LayoutInflater.from(parent.context)))
     }
+
+    override fun getItemViewType(position: Int) = R.layout.task_list_item
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val task = getItem(position)

@@ -26,7 +26,8 @@ class TaskViewModel(application: Application): AndroidViewModel(application) {
 
     init {
         runBlocking {
-            tasksRepo.insertTask(*createRandomTasks(40).map { t -> t.asDomainModel() }.toTypedArray())
+            tasksRepo.clearAllTasks()
+            tasksRepo.insertTask(*createRandomTasks(15).map { t -> t.asDomainModel() }.toTypedArray())
         }
     }
 
