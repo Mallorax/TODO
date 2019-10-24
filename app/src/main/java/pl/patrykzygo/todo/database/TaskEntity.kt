@@ -43,7 +43,7 @@ fun TaskEntity.asDomainModel(): Task{
         this.taskId,
         this.title,
         this.description,
-        SimpleDateFormat("dd MM yyyy hh:mm").parse(this.date),
+        SimpleDateFormat("dd/MM/yyyy HH:mm").parse(this.date),
         this.hasNotification,
         this.notificationType,
         this.priority,

@@ -21,14 +21,12 @@ class TaskViewModel(application: Application): AndroidViewModel(application) {
     private val database = TaskDatabase.getInstance(application)
     private val tasksRepo: TaskRepository = RoomRepositoryImpl(database)
 
-    lateinit var allTasks: LiveData<List<Task>>
+    var allTasks: LiveData<List<Task>> = runBlocking {tasksRepo.receiveAllTasks()}
 
 
     init {
-
-        uiScope.launch {
+        runBlocking {
             tasksRepo.insertTask(*createRandomTasks(40).map { t -> t.asDomainModel() }.toTypedArray())
-            allTasks = tasksRepo.receiveAllTasks()
         }
     }
 

@@ -34,7 +34,7 @@ fun createRandomTasks(count: Int): List<TaskEntity>{
                 0,
                 getRandomString((0..x).random()),
                 getRandomString((0..x).random()),
-                SimpleDateFormat("dd MM yyyy hh:mm").format(randomDate().time),
+                SimpleDateFormat("dd/MM/yyyy hh:mm").format(randomDate().time),
                 Random.nextBoolean(),
                 getRandomString((0..x).random()),
                 (0..x).random(),
