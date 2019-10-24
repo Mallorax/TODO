@@ -1,4 +1,4 @@
-package pl.patrykzygo.todo
+package pl.patrykzygo.todo.ui
 
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 
 import kotlinx.android.synthetic.main.activity_main.*
+import pl.patrykzygo.todo.R
 
 class MainActivity : AppCompatActivity() {
 
