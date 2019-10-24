@@ -1,20 +1,22 @@
 package pl.patrykzygo.todo.ui
 
 import android.content.DialogInterface
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import pl.patrykzygo.todo.databinding.TaskListItemBinding
 import pl.patrykzygo.todo.databinding.TasksListFragmentBinding
 import pl.patrykzygo.todo.domain.Task
 
-class TasksListAdapter(private val onClickListener: View.OnClickListener): ListAdapter<Task, TasksListAdapter.TaskViewHolder>(DiffCallback) {
+class TasksListAdapter(private val onClickListener: OnClickListener): ListAdapter<Task, TasksListAdapter.TaskViewHolder>(DiffCallback) {
 
 
 
 
-    class TaskViewHolder(private var binding: TasksListFragmentBinding)
+    class TaskViewHolder(private var binding: TaskListItemBinding)
         :RecyclerView.ViewHolder(binding.root){
         fun bind(task: Task){
             binding.bindedTask = task
@@ -33,10 +35,18 @@ class TasksListAdapter(private val onClickListener: View.OnClickListener): ListA
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return TaskViewHolder(TaskListItemBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val task = getItem(position)
+        holder.itemView.setOnClickListener{
+            onClickListener.onClick(task)
+        }
+        holder.bind(task)
+    }
+
+    class OnClickListener(val clickListener: (task: Task) -> Unit){
+        fun onClick(task: Task) = clickListener(task)
     }
 }
