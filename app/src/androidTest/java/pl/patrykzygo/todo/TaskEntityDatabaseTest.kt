@@ -89,7 +89,7 @@ class TaskEntityDatabaseTest {
         taskDao.insert(*tasks.toTypedArray())
         val randomId = (0..4).random().toLong()
         val result = taskDao.getWithId(randomId).blockingObserve()
-        assertEquals(result?.taskId, randomId)
+        assertEquals(randomId, result?.taskId)
 
 
     }

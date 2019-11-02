@@ -36,7 +36,7 @@ class TasksListAdapter(private val onClickListener: OnClickListener): ListAdapte
         return TaskViewHolder(TaskListItemBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
-    override fun getItemViewType(position: Int) = R.layout.task_list_item
+
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val task = getItem(position)
