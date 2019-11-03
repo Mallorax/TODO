@@ -12,10 +12,16 @@
         android:label="List of tasks"
         tools:layout="@layout/tasks_list_fragment">
 
+        <action
+            android:id="@+id/action_tasksListFragment_to_addTaskFragment"
+            app:destination="@id/addTaskFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/addTaskFragment">
+        android:id="@+id/addTaskFragment"
+        android:name="pl.patrykzygo.todo.ui.add_task.AddTaskFragment"
+        android:label="Add new task"
+        tools:layout="@layout/add_task_fragment">
 
 
     </fragment>

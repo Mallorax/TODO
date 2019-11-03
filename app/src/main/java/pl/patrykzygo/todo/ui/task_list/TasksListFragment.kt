@@ -28,6 +28,9 @@ class TasksListFragment : Fragment(){
                 Toast.makeText(this.context, it.taskId.toString(), Toast.LENGTH_LONG).show()
             })
         binding.tasksRecycler.adapter = adapter
+        binding.addTaskActionButton.setOnClickListener { view ->
+            view.findNavController().navigate(TasksListFragmentDirections.actionTasksListFragmentToAddTaskFragment())
+        }
 
         return binding.root
     }

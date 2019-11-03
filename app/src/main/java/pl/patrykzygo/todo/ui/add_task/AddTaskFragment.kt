@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import pl.patrykzygo.todo.databinding.AddTaskFragmentBinding
 
 class AddTaskFragment : Fragment() {
 
@@ -13,6 +15,8 @@ class AddTaskFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+        setHasOptionsMenu(true)
+        val binding = AddTaskFragmentBinding.inflate(inflater)
+        return binding.root
     }
 }
