@@ -24,7 +24,7 @@
             android:layout_marginEnd="8dp"
             android:hint="@string/name_of_your_task"
             app:counterEnabled="true"
-            app:counterMaxLength="20"
+            app:counterMaxLength="30"
             app:errorEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +50,7 @@
             android:layout_marginBottom="8dp"
             android:hint="@string/tag_of_your_task"
             app:counterEnabled="true"
-            app:counterMaxLength="20"
+            app:counterMaxLength="30"
             app:errorEnabled="true"
             app:layout_constraintBottom_toTopOf="@id/task_date_layout"
             app:layout_constraintEnd_toStartOf="@+id/task_priority_input_layout"
@@ -104,6 +104,7 @@
                 android:id="@+id/task_date_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:focusable="false"
                 android:enabled="false"
                 android:inputType="date" />
 
@@ -129,6 +130,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:hint="@string/time"
@@ -138,9 +140,10 @@
             app:layout_constraintTop_toTopOf="@id/task_date_layout">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/task_date_time_text"
+                android:id="@+id/task_time_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:focusable="false"
                 android:enabled="false"
                 android:inputType="time" />
 
@@ -207,7 +210,6 @@
             android:hint="@string/description"
             app:counterEnabled="true"
             app:counterMaxLength="300"
-            app:endIconMode="clear_text"
             app:errorEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -229,6 +231,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:text="@string/submit"
+            android:textColor="#ffffffff"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/task_description_input_layout" />
 
