@@ -4,6 +4,7 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import pl.patrykzygo.todo.domain.Task
+import pl.patrykzygo.todo.ui.task_list.TasksListAdapter
 import java.text.SimpleDateFormat
 import java.util.*
 

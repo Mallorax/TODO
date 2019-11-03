@@ -8,9 +8,15 @@
 
     <fragment
         android:id="@+id/tasksListFragment"
-        android:name="pl.patrykzygo.todo.ui.TasksListFragment"
+        android:name="pl.patrykzygo.todo.ui.task_list.TasksListFragment"
         android:label="List of tasks"
         tools:layout="@layout/tasks_list_fragment">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/addTaskFragment">
+
 
     </fragment>
 

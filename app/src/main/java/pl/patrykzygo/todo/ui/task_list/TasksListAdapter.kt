@@ -1,15 +1,16 @@
-package pl.patrykzygo.todo.ui
+package pl.patrykzygo.todo.ui.task_list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import pl.patrykzygo.todo.R
 import pl.patrykzygo.todo.databinding.TaskListItemBinding
 import pl.patrykzygo.todo.domain.Task
 
-class TasksListAdapter(private val onClickListener: OnClickListener): ListAdapter<Task, TasksListAdapter.TaskViewHolder>(DiffCallback) {
+class TasksListAdapter(private val onClickListener: OnClickListener): ListAdapter<Task, TasksListAdapter.TaskViewHolder>(
+    DiffCallback
+) {
 
 
 
@@ -33,7 +34,11 @@ class TasksListAdapter(private val onClickListener: OnClickListener): ListAdapte
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
-        return TaskViewHolder(TaskListItemBinding.inflate(LayoutInflater.from(parent.context)))
+        return TaskViewHolder(
+            TaskListItemBinding.inflate(
+                LayoutInflater.from(parent.context)
+            )
+        )
     }
 
 
