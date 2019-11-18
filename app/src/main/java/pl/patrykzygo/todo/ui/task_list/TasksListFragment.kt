@@ -9,12 +9,11 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import pl.patrykzygo.todo.R
 import pl.patrykzygo.todo.databinding.TasksListFragmentBinding
-import pl.patrykzygo.todo.viewmodels.TaskViewModel
 
 class TasksListFragment : Fragment(){
 
-    private val viewModel: TaskViewModel by lazy {
-        ViewModelProviders.of(this).get(TaskViewModel::class.java)
+    private val listViewModel: TaskListViewModel by lazy {
+        ViewModelProviders.of(this).get(TaskListViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -22,7 +21,7 @@ class TasksListFragment : Fragment(){
         setHasOptionsMenu(true)
         val binding = TasksListFragmentBinding.inflate(inflater)
         binding.lifecycleOwner = this
-        binding.viewModel = viewModel
+        binding.viewModel = listViewModel
         val adapter =
             TasksListAdapter(TasksListAdapter.OnClickListener {
                 Toast.makeText(this.context, it.taskId.toString(), Toast.LENGTH_LONG).show()

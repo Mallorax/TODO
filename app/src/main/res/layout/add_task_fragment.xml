@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="pl.patrykzygo.todo.viewmodels.AddTaskViewModel" />
+            type="pl.patrykzygo.todo.ui.add_task.AddTaskViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -23,7 +23,20 @@
         android:label="Add new task"
         tools:layout="@layout/add_task_fragment">
 
+        <action
+            android:id="@+id/action_addTaskFragment_to_datePickerFragment"
+            app:destination="@id/datePickerFragment" />
+    </fragment>
 
+    <fragment
+        android:id="@+id/datePickerFragment"
+        android:name="pl.patrykzygo.todo.ui.add_task.DatePickerFragment"
+        android:label="@string/pick_date_string"
+        tools:layout="@layout/date_dialog_layout">
+
+        <action
+            android:id="@+id/action_datePickerFragment_to_addTaskFragment"
+            app:destination="@id/addTaskFragment" />
     </fragment>
 
 </navigation>
