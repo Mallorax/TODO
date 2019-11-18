@@ -21,7 +21,7 @@ class DatePickerFragment: DialogFragment(), DatePickerDialog.OnDateSetListener {
 
     private lateinit var binding: DateDialogLayoutBinding
     private val viewModel: AddTaskViewModel by lazy {
-        ViewModelProviders.of(this.requireParentFragment()).get(AddTaskViewModel::class.java)
+        ViewModelProviders.of(parentFragment!!).get(AddTaskViewModel::class.java)
     }
 
 
@@ -40,6 +40,15 @@ class DatePickerFragment: DialogFragment(), DatePickerDialog.OnDateSetListener {
         binding.confirmDateButton.setOnClickListener {
             findNavController().navigate(R.id.addTaskFragment)
         }
+
+    }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val c = Calendar.getInstance()
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+        val day = c.get(Calendar.DAY_OF_MONTH)
+        return DatePickerDialog(activity, this, year, month, day)
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {

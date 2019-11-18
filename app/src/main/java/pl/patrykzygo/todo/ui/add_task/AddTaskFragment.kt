@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import kotlinx.android.synthetic.main.add_task_fragment.*
 import pl.patrykzygo.todo.databinding.AddTaskFragmentBinding
 import java.text.SimpleDateFormat
 
@@ -27,9 +28,10 @@ class AddTaskFragment : Fragment() {
         binding = AddTaskFragmentBinding.inflate(inflater)
         binding.viewModel = viewModel
         binding.datePickerImage.setOnClickListener { showDatePickerDialog(it) }
-        viewModel.date.observe(this, Observer {
+        viewModel.date.observe(viewLifecycleOwner, Observer {
             val format = SimpleDateFormat("dd/MM/yyyy")
-            binding.taskDateEditText.setText(format.format(it.time))
+            val text = format.format(it.time)
+            binding.taskDateEditText.setText(text)
         })
 
         return binding.root
