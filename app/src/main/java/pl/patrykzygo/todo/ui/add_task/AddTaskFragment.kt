@@ -1,7 +1,5 @@
 package pl.patrykzygo.todo.ui.add_task
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +9,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import pl.patrykzygo.todo.databinding.AddTaskFragmentBinding
 import java.text.SimpleDateFormat
-import java.util.*
 
 class AddTaskFragment : Fragment() {
 
@@ -29,7 +26,7 @@ class AddTaskFragment : Fragment() {
         setHasOptionsMenu(true)
         binding = AddTaskFragmentBinding.inflate(inflater)
         binding.viewModel = viewModel
-        binding.datePickerImage.setOnClickListener { showDatePickerDialog() }
+        binding.datePickerImage.setOnClickListener { showDatePickerDialog(it) }
         viewModel.date.observe(this, Observer {
             val format = SimpleDateFormat("dd/MM/yyyy")
             binding.taskDateEditText.setText(format.format(it.time))
@@ -38,7 +35,7 @@ class AddTaskFragment : Fragment() {
         return binding.root
     }
 
-    private fun showDatePickerDialog(){
+    private fun showDatePickerDialog(v: View){
         val fragment = DatePickerFragment()
         fragment.show(childFragmentManager, "datePicker")
 

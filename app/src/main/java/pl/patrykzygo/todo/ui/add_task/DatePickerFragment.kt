@@ -10,6 +10,8 @@ import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import pl.patrykzygo.todo.R
 
 import pl.patrykzygo.todo.databinding.DateDialogLayoutBinding
 import java.util.*
@@ -36,7 +38,7 @@ class DatePickerFragment: DialogFragment(), DatePickerDialog.OnDateSetListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.confirmDateButton.setOnClickListener {
-            view.findNavController().navigate(DatePickerFragmentDirections.actionDatePickerFragmentToAddTaskFragment())
+            findNavController().navigate(R.id.addTaskFragment)
         }
     }
 
