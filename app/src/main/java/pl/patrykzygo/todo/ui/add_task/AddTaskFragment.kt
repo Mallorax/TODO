@@ -7,9 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import kotlinx.android.synthetic.main.add_task_fragment.*
+import com.google.android.material.textfield.TextInputEditText
 import pl.patrykzygo.todo.databinding.AddTaskFragmentBinding
 import java.text.SimpleDateFormat
+import java.util.*
 
 class AddTaskFragment : Fragment() {
 
@@ -29,12 +30,27 @@ class AddTaskFragment : Fragment() {
         binding.viewModel = viewModel
         binding.datePickerImage.setOnClickListener { showDatePickerDialog(it) }
         viewModel.date.observe(viewLifecycleOwner, Observer {
-            val format = SimpleDateFormat("dd/MM/yyyy")
-            val text = format.format(it.time)
-            binding.taskDateEditText.setText(text)
+            setDateAndTimeValues(binding.taskDateEditText, it, "dd/MM/yyyy")
+        })
+
+        binding.timePickerImage.setOnClickListener { showTimePickerDialog(it) }
+
+        viewModel.time.observe(viewLifecycleOwner, Observer {
+            setDateAndTimeValues(binding.taskTimeEditText, it, "HH:mm")
         })
 
         return binding.root
+    }
+
+    private fun setDateAndTimeValues(field: TextInputEditText, c: Calendar, pattern: String){
+        val f = SimpleDateFormat(pattern)
+        val text = f.format(c.time)
+        field.setText(text)
+    }
+
+    private fun showTimePickerDialog(v: View){
+        val fragment = TimePickerFragment()
+        fragment.show(childFragmentManager,"timePicker")
     }
 
     private fun showDatePickerDialog(v: View){

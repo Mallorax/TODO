@@ -13,13 +13,13 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import pl.patrykzygo.todo.R
 
-import pl.patrykzygo.todo.databinding.DateDialogLayoutBinding
+import pl.patrykzygo.todo.databinding.DatePickerDialogLayoutBinding
 import java.util.*
 
 
 class DatePickerFragment: DialogFragment(), DatePickerDialog.OnDateSetListener {
 
-    private lateinit var binding: DateDialogLayoutBinding
+    private lateinit var binding: DatePickerDialogLayoutBinding
     private val viewModel: AddTaskViewModel by lazy {
         ViewModelProviders.of(parentFragment!!).get(AddTaskViewModel::class.java)
     }
@@ -31,7 +31,7 @@ class DatePickerFragment: DialogFragment(), DatePickerDialog.OnDateSetListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DateDialogLayoutBinding.inflate(inflater)
+        binding = DatePickerDialogLayoutBinding.inflate(inflater)
        return binding.root
     }
 
@@ -48,7 +48,7 @@ class DatePickerFragment: DialogFragment(), DatePickerDialog.OnDateSetListener {
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
-        return DatePickerDialog(activity, this, year, month, day)
+        return DatePickerDialog(parentFragment!!.context, this, year, month, day)
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {

@@ -32,7 +32,7 @@
         android:id="@+id/datePickerFragment"
         android:name="pl.patrykzygo.todo.ui.add_task.DatePickerFragment"
         android:label="@string/pick_date_string"
-        tools:layout="@layout/date_dialog_layout">
+        tools:layout="@layout/date_picker_dialog_layout">
 
         <action
             android:id="@+id/action_datePickerFragment_to_addTaskFragment"

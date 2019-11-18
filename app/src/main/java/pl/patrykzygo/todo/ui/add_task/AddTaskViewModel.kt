@@ -13,6 +13,14 @@ class AddTaskViewModel: ViewModel() {
     val date: LiveData<Calendar>
     get() = _date
 
+    private val _time = MutableLiveData<Calendar>()
+    val time: LiveData<Calendar>
+    get() = _time
+
+    fun setTime(time: Calendar){
+        _time.value = time
+    }
+
     fun setDate(date: Calendar){
         _date.value = date
     }

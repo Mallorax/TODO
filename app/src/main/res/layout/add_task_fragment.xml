@@ -135,12 +135,12 @@
             android:layout_marginBottom="8dp"
             android:hint="@string/time"
             app:layout_constraintBottom_toBottomOf="@id/task_date_layout"
-            app:layout_constraintEnd_toStartOf="@+id/add_time_image"
+            app:layout_constraintEnd_toStartOf="@+id/time_picker_image"
             app:layout_constraintStart_toEndOf="@id/date_picker_image"
             app:layout_constraintTop_toTopOf="@id/task_date_layout">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/task_time_text"
+                android:id="@+id/task_time_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusable="false"
@@ -150,7 +150,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <ImageView
-            android:id="@+id/add_time_image"
+            android:id="@+id/time_picker_image"
             style="@style/Widget.AppCompat.ActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
