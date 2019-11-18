@@ -26,20 +26,30 @@ class AddTaskFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         setHasOptionsMenu(true)
+
         binding = AddTaskFragmentBinding.inflate(inflater)
         binding.viewModel = viewModel
+
+        setUpListeners()
+        setUpObservers()
+
+        return binding.root
+    }
+    
+    private fun setUpListeners(){
         binding.datePickerImage.setOnClickListener { showDatePickerDialog(it) }
+        binding.timePickerImage.setOnClickListener { showTimePickerDialog(it) }
+    }
+
+    private fun setUpObservers(){
         viewModel.date.observe(viewLifecycleOwner, Observer {
             setDateAndTimeValues(binding.taskDateEditText, it, "dd/MM/yyyy")
         })
-
-        binding.timePickerImage.setOnClickListener { showTimePickerDialog(it) }
 
         viewModel.time.observe(viewLifecycleOwner, Observer {
             setDateAndTimeValues(binding.taskTimeEditText, it, "HH:mm")
         })
 
-        return binding.root
     }
 
     private fun setDateAndTimeValues(field: TextInputEditText, c: Calendar, pattern: String){
