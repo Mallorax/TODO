@@ -10,6 +10,8 @@
             type="pl.patrykzygo.todo.ui.add_task.AddTaskViewModel" />
     </data>
 
+    <!--TODO: make this layout responsive -->
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -225,6 +227,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/submit_task_button"
             style="@style/TextAppearance.MaterialComponents.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

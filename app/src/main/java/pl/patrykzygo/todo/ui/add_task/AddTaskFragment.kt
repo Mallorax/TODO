@@ -7,8 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
+import pl.patrykzygo.todo.R
+import pl.patrykzygo.todo.database.NotificationType
+import pl.patrykzygo.todo.database.asDomainModel
 import pl.patrykzygo.todo.databinding.AddTaskFragmentBinding
+import pl.patrykzygo.todo.domain.Task
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -33,6 +38,32 @@ class AddTaskFragment : Fragment() {
         setUpListeners()
         setUpObservers()
 
+        binding.submitTaskButton.setOnClickListener {
+            val dateString = binding.taskDateEditText.text.toString() + " " + binding.taskTimeEditText.text.toString()
+            val c = Calendar.getInstance()
+            c.time = SimpleDateFormat("dd/MM/yyyy HH:mm").parse(dateString)
+            val task = Task(
+                0, binding.taskNameInputEditText.text.toString(),
+                binding.taskDescriptionInput.text.toString(),
+                c, true, "",
+                binding.taskPriorityEditText.text.toString().toInt(),
+                binding.taskTagInputEditText.text.toString()
+            )
+            when(binding.taskAlarmRadioGroup.checkedRadioButtonId) {
+                 R.id.task_type_alarm -> {
+                     task.notificationType = NotificationType.NOTIFICATION_ALARM
+                    viewModel.insertNewTask(task)
+                    Snackbar.make(it, "Task "+task.title+ " added with alarm", Snackbar.LENGTH_LONG).show()
+                }
+                R.id.task_type_notification -> {
+                    task.notificationType = NotificationType.NOTIFICATION_POPUP
+                    viewModel.insertNewTask(task)
+                    Snackbar.make(it, "Task "+task.title+ " added with notification", Snackbar.LENGTH_LONG).show()
+                }
+                else -> Snackbar.make(it, "No notification type selected", Snackbar.LENGTH_LONG).show()
+            }
+        }
+
         return binding.root
     }
     
@@ -51,6 +82,7 @@ class AddTaskFragment : Fragment() {
         })
 
     }
+
 
     private fun setDateAndTimeValues(field: TextInputEditText, c: Calendar, pattern: String){
         val f = SimpleDateFormat(pattern)

@@ -3,6 +3,7 @@ package pl.patrykzygo.todo.ui.task_list
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.*
 import pl.patrykzygo.todo.createRandomTasks
 import pl.patrykzygo.todo.database.TaskDatabase
@@ -20,20 +21,7 @@ class TaskListViewModel(application: Application): AndroidViewModel(application)
 
     var allTasks: LiveData<List<Task>> = runBlocking {tasksRepo.receiveAllTasks()}
 
-
-    init {
-        runBlocking {
-            tasksRepo.clearAllTasks()
-            tasksRepo.insertTask(*createRandomTasks(15).map { t -> t.asDomainModel() }.toTypedArray())
-        }
-    }
-
-
-    
-
-
-
-
+    //TODO: Get rid of runBlocking block
 
     override fun onCleared() {
         super.onCleared()

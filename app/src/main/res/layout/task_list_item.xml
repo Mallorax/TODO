@@ -9,6 +9,8 @@
             type="pl.patrykzygo.todo.domain.Task" />
     </data>
 
+    <!-- TODO: improve this layout so it always takes whole width -->
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
