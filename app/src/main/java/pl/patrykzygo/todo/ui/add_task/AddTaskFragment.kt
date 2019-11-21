@@ -38,6 +38,7 @@ class AddTaskFragment : Fragment() {
         setUpListeners()
         setUpObservers()
 
+        //TODO add fix in case of adding empty task
         binding.submitTaskButton.setOnClickListener {
             val dateString = binding.taskDateEditText.text.toString() + " " + binding.taskTimeEditText.text.toString()
             val c = Calendar.getInstance()
