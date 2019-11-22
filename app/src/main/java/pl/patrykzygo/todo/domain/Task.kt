@@ -3,6 +3,7 @@ package pl.patrykzygo.todo.domain
 
 import pl.patrykzygo.todo.database.TaskEntity
 import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.util.*
 
@@ -46,7 +47,10 @@ fun Task.toDatabaseEntity():TaskEntity{
         this.taskId,
         this.title,
         this.description,
-        DateFormat.getInstance().format(date.time),
+        let {
+            val format = SimpleDateFormat("dd/MM/yyyy HH:mm")
+            format.format(date.time)
+        },
         this.hasNotification,
         this.notificationType,
         this.priority,
