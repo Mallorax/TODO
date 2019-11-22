@@ -19,6 +19,8 @@ class TasksListFragment : Fragment(){
         ViewModelProviders.of(this).get(TaskListViewModel::class.java)
     }
 
+    //comment
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(true)
