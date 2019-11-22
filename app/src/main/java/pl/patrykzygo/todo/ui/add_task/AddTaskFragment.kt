@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -91,13 +92,12 @@ class AddTaskFragment : Fragment() {
     }
 
     private fun showTimePickerDialog(v: View){
-        val fragment = TimePickerFragment()
-        fragment.show(childFragmentManager,"timePicker")
+        TimePickerFragment().show(childFragmentManager,"timePicker")
     }
 
     private fun showDatePickerDialog(v: View){
-        val fragment = DatePickerFragment()
-        fragment.show(childFragmentManager, "datePicker")
+
+        DatePickerFragment().show(childFragmentManager, "datePicker")
 
     }
 

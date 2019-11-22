@@ -14,7 +14,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toStartOf="@+id/middle_guideline"
+        app:layout_constraintStart_toStartOf="@+id/middle_guideline">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/task_name_input_layout"
@@ -28,7 +30,9 @@
             app:counterEnabled="true"
             app:counterMaxLength="30"
             app:errorEnabled="true"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/task_date_layout"
+            app:layout_constraintEnd_toStartOf="@+id/middle_guideline"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -54,11 +58,11 @@
             app:counterEnabled="true"
             app:counterMaxLength="30"
             app:errorEnabled="true"
-            app:layout_constraintBottom_toTopOf="@id/task_date_layout"
+            app:layout_constraintBottom_toBottomOf="@+id/task_name_input_layout"
             app:layout_constraintEnd_toStartOf="@+id/task_priority_input_layout"
             app:layout_constraintHorizontal_weight="7"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/task_name_input_layout">
+            app:layout_constraintStart_toStartOf="@+id/middle_guideline"
+            app:layout_constraintTop_toTopOf="@+id/task_name_input_layout">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/task_tag_input_edit_text"
@@ -75,6 +79,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:hint="@string/priority_level"
+            app:layout_constraintBottom_toBottomOf="@+id/task_tag_input_layout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_weight="3"
             app:layout_constraintStart_toEndOf="@+id/task_tag_input_layout"
@@ -88,42 +93,16 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/task_date_layout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:hint="@string/date"
-            app:layout_constraintBottom_toTopOf="@+id/task_alarm_radio_group"
-            app:layout_constraintEnd_toStartOf="@id/date_picker_image"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/task_tag_input_layout">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/task_date_edit_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:focusable="false"
-                android:enabled="false"
-                android:inputType="date" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
         <ImageView
             android:id="@+id/date_picker_image"
             style="@style/Widget.AppCompat.ActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
             android:contentDescription="@string/date_picker_content"
             android:src="@drawable/ic_date_range_24px"
             app:layout_constraintBottom_toBottomOf="@+id/task_date_layout"
-            app:layout_constraintEnd_toStartOf="@id/task_time_layout"
-            app:layout_constraintStart_toEndOf="@+id/task_date_layout"
+            app:layout_constraintEnd_toStartOf="@+id/middle_guideline"
             app:layout_constraintTop_toTopOf="@+id/task_date_layout" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -131,22 +110,21 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:hint="@string/time"
-            app:layout_constraintBottom_toBottomOf="@id/task_date_layout"
-            app:layout_constraintEnd_toStartOf="@+id/time_picker_image"
-            app:layout_constraintStart_toEndOf="@id/date_picker_image"
-            app:layout_constraintTop_toTopOf="@id/task_date_layout">
+            app:layout_constraintBottom_toTopOf="@+id/task_description_input_layout"
+            app:layout_constraintEnd_toEndOf="@+id/task_date_layout"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/task_date_layout"
+            app:layout_constraintTop_toBottomOf="@+id/task_date_layout">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/task_time_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:focusable="false"
                 android:enabled="false"
+                android:focusable="false"
                 android:inputType="time" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -156,39 +134,27 @@
             style="@style/Widget.AppCompat.ActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
             android:contentDescription="@string/set_time_for_your_task"
             android:src="@drawable/ic_add_alarm_24px"
             app:layout_constraintBottom_toBottomOf="@+id/task_time_layout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/task_time_layout"
-            app:layout_constraintTop_toTopOf="@+id/task_time_layout" />
+            app:layout_constraintEnd_toStartOf="@+id/middle_guideline"
+            app:layout_constraintTop_toTopOf="@+id/task_time_layout"
+            app:layout_constraintVertical_bias="1.0" />
 
         <RadioGroup
             android:id="@+id/task_alarm_radio_group"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:weightSum="10"
-            app:layout_constraintBottom_toTopOf="@+id/task_description_input_layout"
+            app:layout_constraintBottom_toBottomOf="@+id/task_time_layout"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/task_date_layout">
-
-
-            <RadioButton
-                android:id="@+id/task_type_alarm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:padding="@dimen/padding"
-                android:text="@string/alarm" />
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/middle_guideline"
+            app:layout_constraintTop_toTopOf="@+id/task_date_layout">
 
             <RadioButton
                 android:id="@+id/task_type_notification"
@@ -199,23 +165,31 @@
                 android:text="@string/notification" />
 
 
+            <RadioButton
+                android:id="@+id/task_type_alarm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:padding="@dimen/padding"
+                android:text="@string/alarm" />
+
         </RadioGroup>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/task_description_input_layout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:hint="@string/description"
             app:counterEnabled="true"
             app:counterMaxLength="300"
             app:errorEnabled="true"
+            app:layout_constraintBottom_toTopOf="@id/submit_task_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/task_alarm_radio_group">
+            app:layout_constraintTop_toBottomOf="@+id/task_time_layout">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/task_description_input"
@@ -237,8 +211,39 @@
             android:textColor="#ffffffff"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/task_description_input_layout"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/task_description_input_layout" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/middle_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/task_date_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:hint="@string/date"
+            app:layout_constraintBottom_toTopOf="@+id/task_time_layout"
+            app:layout_constraintEnd_toStartOf="@+id/date_picker_image"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/task_name_input_layout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/task_date_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:focusable="false"
+                android:inputType="date" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
