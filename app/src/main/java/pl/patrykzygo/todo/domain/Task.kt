@@ -2,9 +2,7 @@ package pl.patrykzygo.todo.domain
 
 
 import pl.patrykzygo.todo.database.TaskEntity
-import java.text.DateFormat
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
 import java.util.*
 
 
@@ -12,11 +10,11 @@ data class Task(
 
     val taskId: Long = 0L,
 
-    var title: String,
+    var name: String,
 
     var description: String,
 
-    var date: Calendar,
+    var date: Calendar?,
 
     var hasNotification: Boolean,
 
@@ -31,7 +29,7 @@ data class Task(
         return if (other == null || other !is Task){
             false
         }else{
-            this.title == other.title &&
+            this.name == other.name &&
                     this.description == other.description &&
                     this.date == other.date &&
                     this.hasNotification == other.hasNotification &&
@@ -45,11 +43,11 @@ data class Task(
 fun Task.toDatabaseEntity():TaskEntity{
     return TaskEntity(
         this.taskId,
-        this.title,
+        this.name,
         this.description,
         let {
             val format = SimpleDateFormat("dd/MM/yyyy HH:mm")
-            format.format(date.time)
+            format.format(date?.time)
         },
         this.hasNotification,
         this.notificationType,

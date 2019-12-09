@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="@{bindedTask.title}"
+            android:text="@{bindedTask.name}"
             app:layout_constraintBottom_toTopOf="@+id/task_tag"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="@+id/guideline2"

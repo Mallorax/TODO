@@ -3,6 +3,7 @@ package pl.patrykzygo.todo.ui.add_task
 import android.app.Application
 import androidx.lifecycle.*
 import kotlinx.coroutines.*
+import pl.patrykzygo.todo.R
 import pl.patrykzygo.todo.database.TaskDatabase
 import pl.patrykzygo.todo.domain.Task
 import pl.patrykzygo.todo.repository.RoomRepositoryImpl
@@ -36,6 +37,7 @@ class AddTaskViewModel(application: Application) : AndroidViewModel(application)
     override fun onCleared() {
         super.onCleared()
     }
+
 
     fun insertNewTask(task: Task) {
         GlobalScope.launch(Dispatchers.IO) {
