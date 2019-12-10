@@ -67,6 +67,10 @@ class AddTaskFragment : Fragment() {
                 task.notificationType = NotificationType.NOTIFICATION_POPUP
                 Snackbar.make(v, "Task \""+task.name+ "\" added with notification", Snackbar.LENGTH_LONG).show()
             }
+            R.id.task_type_none -> {
+                task.notificationType = NotificationType.NOTIFICATION_NONE
+                Snackbar.make(v, "Task \""+task.name+ "\" added without any notification", Snackbar.LENGTH_LONG).show()
+            }
             else -> Snackbar.make(v, "No notification type selected", Snackbar.LENGTH_LONG).show()
         }
 

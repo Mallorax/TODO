@@ -15,4 +15,5 @@
     <string name="confirm">confirm</string>
     <string name="pick_date_string">Pick a date</string>
     <string name="field_required_message">Field required</string>
+    <string name="no_alarm">No alarm</string>
 </resources>
