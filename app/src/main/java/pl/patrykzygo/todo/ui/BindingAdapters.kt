@@ -9,27 +9,35 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 @BindingAdapter("taskList")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<Task>?){
-    if (recyclerView.adapter is TasksListAdapter){
+fun bindRecyclerView(recyclerView: RecyclerView, data: List<Task>?) {
+    if (recyclerView.adapter is TasksListAdapter) {
         (recyclerView.adapter as TasksListAdapter).submitList(data)
     }
 }
 
 @BindingAdapter("taskDate")
-fun bindTaskDate(textView: TextView, calendar: Calendar){
-    val dateFormat = SimpleDateFormat("dd/MM/yyyy")
-    val dateString = dateFormat.format(calendar.time)
-    textView.text = dateString
+fun bindTaskDate(textView: TextView, calendar: Calendar?) {
+    if (calendar != null) {
+        val dateFormat = SimpleDateFormat("dd/MM/yyyy")
+        val dateString = dateFormat.format(calendar.time)
+        textView.text = dateString
+    } else {
+        textView.text = ""
+    }
 }
 
 @BindingAdapter("taskTime")
-fun bindTaskTime(textView: TextView, calendar: Calendar){
-    val dateFormat = SimpleDateFormat("HH:mm")
-    val timeString = dateFormat.format(calendar.time)
-    textView.text = timeString
+fun bindTaskTime(textView: TextView, calendar: Calendar?) {
+    if (calendar != null) {
+        val dateFormat = SimpleDateFormat("HH:mm")
+        val timeString = dateFormat.format(calendar.time)
+        textView.text = timeString
+    } else {
+        textView.text = ""
+    }
 }
 
 @BindingAdapter("taskPriority")
-fun bindTaskPriority(textView: TextView, task: Task){
+fun bindTaskPriority(textView: TextView, task: Task) {
     textView.text = task.priority.toString()
 }

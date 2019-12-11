@@ -46,8 +46,12 @@ fun Task.toDatabaseEntity():TaskEntity{
         this.name,
         this.description,
         let {
-            val format = SimpleDateFormat("dd/MM/yyyy HH:mm")
-            format.format(date?.time)
+            if(it.date != null) {
+                val format = SimpleDateFormat("dd/MM/yyyy HH:mm")
+                format.format(date?.time)
+            }else{
+                ""
+            }
         },
         this.hasNotification,
         this.notificationType,
