@@ -18,22 +18,31 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<Task>?) {
 @BindingAdapter("taskDate")
 fun bindTaskDate(textView: TextView, calendar: Calendar?) {
     if (calendar != null) {
-        val dateFormat = SimpleDateFormat("dd/MM/yyyy")
-        val dateString = dateFormat.format(calendar.time)
-        textView.text = dateString
+        if (calendar.get(Calendar.YEAR) == 1970) {
+            textView.text = "---"
+        } else {
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy")
+            val dateString = dateFormat.format(calendar.time)
+            textView.text = dateString
+        }
     } else {
-        textView.text = ""
+        textView.text = "---"
     }
 }
 
 @BindingAdapter("taskTime")
 fun bindTaskTime(textView: TextView, calendar: Calendar?) {
     if (calendar != null) {
-        val dateFormat = SimpleDateFormat("HH:mm")
-        val timeString = dateFormat.format(calendar.time)
-        textView.text = timeString
+        if (calendar.get(Calendar.MINUTE) == 1) {
+            textView.text = "---"
+
+        } else {
+            val dateFormat = SimpleDateFormat("HH:mm")
+            val timeString = dateFormat.format(calendar.time)
+            textView.text = timeString
+        }
     } else {
-        textView.text = ""
+        textView.text = "---"
     }
 }
 

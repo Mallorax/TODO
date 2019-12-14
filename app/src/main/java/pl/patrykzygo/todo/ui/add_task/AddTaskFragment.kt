@@ -46,7 +46,7 @@ class AddTaskFragment : Fragment() {
 
         return binding.root
     }
-    
+
     private fun submitNewTask(v: View) {
         var task: Task
         var validated = checkNoEmptyFields(getString(R.string.field_required_message))
@@ -70,22 +70,31 @@ class AddTaskFragment : Fragment() {
             else -> NotificationType.NOTIFICATION_NONE
         }
     }
+    
 
-    private fun getCalendarFromTextField(): Calendar? {
+    private fun formatIntoCalendar(date: String, time: String): Calendar? {
         var c = Calendar.getInstance()
-        try {
-            val dateString =
-                binding.taskDateLayout.editText?.text.toString() + " " + binding.taskTimeLayout.editText?.text.toString()
-            c.time = SimpleDateFormat("dd/MM/yyyy: HH:mm").parse(dateString)
-        } catch (e: ParseException) {
-            c = null
-            Toast.makeText(context, "calendar null -> parse exception caught", Toast.LENGTH_LONG).show()
+        return if (date != "" && time != ""){
+            val cString = "$date $time"
+            c.time = SimpleDateFormat("dd/MM/yyyy HH:mm").parse(cString)
+            c
+        }else if (date != "" && time == ""){
+            c.time = SimpleDateFormat("dd/MM/yyyy").parse(date)
+            c.set(Calendar.MINUTE, 1)
+            c
+        }else if (date == "" && time != ""){
+            c.set(Calendar.YEAR, 1970)
+            c.time = SimpleDateFormat("HH:mm").parse(time)
+            c
+        }else {
+            null
         }
-        return c
     }
-
     private fun getTaskFromFields(): Task {
-        val c = getCalendarFromTextField()
+        val c = formatIntoCalendar(
+            binding.taskDateLayout.editText?.text.toString(),
+            binding.taskTimeLayout.editText?.text.toString()
+        )
         val notificationType = getSelectedNotificationType()
         return Task(
             0, binding.taskNameInputEditText.text.toString(),
