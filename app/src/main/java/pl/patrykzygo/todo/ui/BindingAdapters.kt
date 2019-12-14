@@ -30,6 +30,7 @@ fun bindTaskDate(textView: TextView, calendar: Calendar?) {
     }
 }
 
+//TODO: Needs to be changed as if someone would try to set min to 1, it will not be displayed
 @BindingAdapter("taskTime")
 fun bindTaskTime(textView: TextView, calendar: Calendar?) {
     if (calendar != null) {

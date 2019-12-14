@@ -70,7 +70,7 @@ class AddTaskFragment : Fragment() {
             else -> NotificationType.NOTIFICATION_NONE
         }
     }
-    
+
 
     private fun formatIntoCalendar(date: String, time: String): Calendar? {
         var c = Calendar.getInstance()
