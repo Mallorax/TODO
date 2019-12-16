@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import pl.patrykzygo.todo.R
 import pl.patrykzygo.todo.databinding.TasksListFragmentBinding
+import pl.patrykzygo.todo.viewmodels.TaskListViewModel
 
 class TasksListFragment : Fragment(){
 

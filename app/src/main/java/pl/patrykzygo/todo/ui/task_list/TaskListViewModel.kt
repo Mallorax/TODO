@@ -1,4 +1,4 @@
-package pl.patrykzygo.todo.viewmodels
+package pl.patrykzygo.todo.ui.task_list
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -12,7 +12,7 @@ import pl.patrykzygo.todo.domain.Task
 import pl.patrykzygo.todo.repository.RoomRepositoryImpl
 import pl.patrykzygo.todo.repository.TaskRepository
 
-class TaskViewModel(application: Application): AndroidViewModel(application) {
+class TaskListViewModel(application: Application): AndroidViewModel(application) {
 
     private val database = TaskDatabase.getInstance(application)
     private val tasksRepo: TaskRepository = RoomRepositoryImpl(database.taskDatabaseDao)
