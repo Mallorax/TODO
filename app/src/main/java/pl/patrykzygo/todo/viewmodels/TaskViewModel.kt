@@ -14,29 +14,29 @@ import pl.patrykzygo.todo.repository.TaskRepository
 
 class TaskViewModel(application: Application): AndroidViewModel(application) {
 
-    private val viewModelJob = Job()
-    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     private val database = TaskDatabase.getInstance(application)
-    private val tasksRepo: TaskRepository = RoomRepositoryImpl(database)
+    private val tasksRepo: TaskRepository = RoomRepositoryImpl(database.taskDatabaseDao)
 
-    lateinit var allTasks: LiveData<List<Task>>
+    private val _allTasks = MutableLiveData<List<Task>>()
+    val allTasks: LiveData<List<Task>>
+        get() = _allTasks
 
-
-    init {
-        uiScope.launch {
-            allTasks = tasksRepo.receiveAllTasks()
+    private fun getAllTasks(){
+        viewModelScope.launch {
+            _allTasks.value = tasksRepo.receiveAllTasks()
         }
+
     }
 
-
-    
-
+    init {
+        getAllTasks()
+    }
 
 
 
 
     override fun onCleared() {
         super.onCleared()
-        viewModelJob.cancel()
+        viewModelScope.cancel()
     }
 }
