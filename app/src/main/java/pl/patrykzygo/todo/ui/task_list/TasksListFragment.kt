@@ -2,17 +2,14 @@ package pl.patrykzygo.todo.ui.task_list
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import pl.patrykzygo.todo.R
 import pl.patrykzygo.todo.databinding.TasksListFragmentBinding
-import pl.patrykzygo.todo.viewmodels.TaskListViewModel
 
 class TasksListFragment : Fragment(){
 
