@@ -8,18 +8,18 @@ import androidx.room.OnConflictStrategy.REPLACE
 interface TaskDatabaseDao {
 
     @Insert(onConflict = REPLACE)
-    fun insert(vararg taskEntity: TaskEntity)
+    suspend fun insert(vararg task: Task)
 
     @Query("SELECT * FROM tasks_table")
-    fun getAll(): LiveData<List<TaskEntity>>
+    suspend fun getAll(): LiveData<List<Task>>
 
     @Query("SELECT * FROM tasks_table WHERE id = :id")
-    fun getWithId(id: Long): LiveData<TaskEntity>
+    suspend fun getWithId(id: Long): LiveData<Task>
 
     @Delete
-    fun deleteTasks(vararg taskEntities: TaskEntity)
+    suspend fun deleteTasks(vararg tasks: Task)
 
     @Query("DELETE FROM tasks_table")
-    fun deleteAllTasks()
+    suspend fun clearAllTasks()
 
 }
