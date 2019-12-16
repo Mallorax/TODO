@@ -1,15 +1,15 @@
-package pl.patrykzygo.todo.viewmodels
+package pl.patrykzygo.todo.ui.task_list
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import java.lang.IllegalArgumentException
 
-class TaskViewModelFactory(val app: Application): ViewModelProvider.Factory {
+class TaskListViewModelFactory(val app: Application): ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if(modelClass.isAssignableFrom(TaskViewModel::class.java)){
+        if(modelClass.isAssignableFrom(TaskListViewModel::class.java)){
             @Suppress("UNCHECKED_CAST")
-            return TaskViewModel(app) as T
+            return TaskListViewModel(app) as T
         }
         throw IllegalArgumentException("Cannot construct viewmodel")
     }

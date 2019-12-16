@@ -43,7 +43,15 @@ fun TaskEntity.asDomainModel(): Task{
         this.taskId,
         this.title,
         this.description,
-        SimpleDateFormat("dd MM yyyy hh:mm").parse(this.date),
+        let { databaseModel ->
+            if(databaseModel.date == ""){
+                null
+            }else {
+                Calendar.getInstance().also {calendar ->
+                    calendar.time = (SimpleDateFormat("dd/MM/yyyy HH:mm").parse(this.date))
+                }
+            }
+        },
         this.hasNotification,
         this.notificationType,
         this.priority,

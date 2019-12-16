@@ -6,8 +6,13 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+
 android {
     compileSdkVersion 28
+    dataBinding{
+        enabled = true
+    }
     defaultConfig {
         applicationId "pl.patrykzygo.todo"
         minSdkVersion 19

@@ -32,13 +32,13 @@ fun createRandomTasks(count: Int): List<TaskEntity>{
         tasks.add(
             TaskEntity(
                 0,
-                getRandomString((0..x).random()),
-                getRandomString((0..x).random()),
-                SimpleDateFormat("dd MM yyyy hh:mm").format(randomDate().time),
+                getRandomString((0..count).random()),
+                getRandomString((0..count).random()),
+                SimpleDateFormat("dd/MM/yyyy hh:mm").format(randomDate().time),
                 Random.nextBoolean(),
-                getRandomString((0..x).random()),
+                getRandomString((0..count).random()),
                 (0..x).random(),
-                getRandomString((0..x).random())
+                getRandomString((0..count).random())
             )
         )
 
