@@ -20,6 +20,9 @@ import java.util.*
 
 class AddTaskFragment : Fragment() {
 
+    //TODO: There are functions that should be in viewModel -> move them
+    //TODO: Make validation for a date fields -> No date pre-current date allowed
+
     private val viewModel: AddTaskViewModel by lazy {
         ViewModelProviders.of(this).get(AddTaskViewModel::class.java)
     }
