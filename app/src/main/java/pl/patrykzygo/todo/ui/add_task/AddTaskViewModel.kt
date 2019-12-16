@@ -14,7 +14,7 @@ import java.util.*
 class AddTaskViewModel(application: Application) : AndroidViewModel(application) {
 
     private val database = TaskDatabase.getInstance(application)
-    private val tasksRepo: TaskRepository = RoomRepositoryImpl(database)
+    private val tasksRepo: TaskRepository = RoomRepositoryImpl(database.taskDatabaseDao)
 
 
     private val _date = MutableLiveData<Calendar>()
