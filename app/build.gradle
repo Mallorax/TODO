@@ -6,8 +6,13 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+
 android {
     compileSdkVersion 28
+    dataBinding{
+        enabled = true
+    }
     defaultConfig {
         applicationId "pl.patrykzygo.todo"
         minSdkVersion 19
@@ -49,7 +54,10 @@ dependencies {
 
     // Room and Lifecycle dependencies
     implementation "androidx.room:room-runtime:$version_room"
+    implementation "androidx.room:room-ktx:$version_room"
     kapt "androidx.room:room-compiler:$version_room"
+
+
     implementation "androidx.lifecycle:lifecycle-extensions:$version_lifecycle_extensions"
 
     // Coroutines
@@ -63,8 +71,13 @@ dependencies {
     implementation "com.google.android.material:material:$version_material"
 
 
+
     testImplementation 'junit:junit:4.12'
+    testImplementation "androidx.room:room-testing:$version_room"
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    testImplementation "io.mockk:mockk:$version_mockk"
+    androidTestImplementation "io.mockk:mockk-android:$version_mockk"
+
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     androidTestImplementation "android.arch.core:core-testing:1.1.1"
 }

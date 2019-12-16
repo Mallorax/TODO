@@ -1,4 +1,19 @@
 <resources>
     <string name="app_name">todo</string>
     <string name="action_settings">Settings</string>
+    <string name="name_of_your_task">Name of your task</string>
+    <string name="description">Description</string>
+    <string name="date_picker_content">Pick date and time for your task</string>
+    <string name="priority_level">Priority level</string>
+    <string name="alarm">Alarm</string>
+    <string name="notification">Notification</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="tag_of_your_task">Tag of your task</string>
+    <string name="set_time_for_your_task">Set time for your task</string>
+    <string name="submit">submit</string>
+    <string name="confirm">confirm</string>
+    <string name="pick_date_string">Pick a date</string>
+    <string name="field_required_message">Field required</string>
+    <string name="no_alarm">No alarm</string>
 </resources>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    android:label="List of tasks"
+    app:startDestination="@id/tasksListFragment">
+
+    <fragment
+        android:id="@+id/tasksListFragment"
+        android:name="pl.patrykzygo.todo.ui.task_list.TasksListFragment"
+        android:label="List of tasks"
+        tools:layout="@layout/tasks_list_fragment">
+
+        <action
+            android:id="@+id/action_tasksListFragment_to_addTaskFragment"
+            app:destination="@id/addTaskFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addTaskFragment"
+        android:name="pl.patrykzygo.todo.ui.add_task.AddTaskFragment"
+        android:label="Add new task"
+        tools:layout="@layout/add_task_fragment">
+
+        <action
+            android:id="@+id/action_addTaskFragment_to_datePickerFragment"
+            app:destination="@id/datePickerFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/datePickerFragment"
+        android:name="pl.patrykzygo.todo.ui.add_task.DatePickerFragment"
+        android:label="@string/pick_date_string"
+        tools:layout="@layout/date_picker_dialog_layout">
+
+        <action
+            android:id="@+id/action_datePickerFragment_to_addTaskFragment"
+            app:destination="@id/addTaskFragment" />
+    </fragment>
+
+</navigation>

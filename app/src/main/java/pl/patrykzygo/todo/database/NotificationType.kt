@@ -6,5 +6,6 @@ class NotificationType(val type: String) {
 
         const val NOTIFICATION_ALARM = "alarm"
         const val NOTIFICATION_POPUP = "popup"
+        const val NOTIFICATION_NONE = "none"
     }
 }

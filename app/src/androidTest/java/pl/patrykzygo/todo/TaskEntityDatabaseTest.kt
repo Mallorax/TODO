@@ -5,8 +5,8 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import junit.framework.Assert.assertEquals
 import org.junit.After
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -18,7 +18,7 @@ import java.io.IOException
 
 
 @RunWith(AndroidJUnit4::class)
-class TaskDatabaseTest {
+class TaskEntityDatabaseTest {
 
 
     @get:Rule val rule = InstantTaskExecutorRule()
@@ -31,7 +31,7 @@ class TaskDatabaseTest {
     fun createDb(){
         val context = ApplicationProvider.getApplicationContext<Context>()
         db = Room.inMemoryDatabaseBuilder(
-            context, TaskDatabase::class.java).build()
+            context, TaskDatabase::class.java).allowMainThreadQueries().build()
         taskDao = db.taskDatabaseDao
     }
 
@@ -89,7 +89,7 @@ class TaskDatabaseTest {
         taskDao.insert(*tasks.toTypedArray())
         val randomId = (0..4).random().toLong()
         val result = taskDao.getWithId(randomId).blockingObserve()
-        assertEquals(result?.taskId, randomId)
+        assertEquals(randomId, result?.taskId)
 
 
     }

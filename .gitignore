@@ -14,7 +14,7 @@
 .cxx
 .idea/libraries/
 .idea/workspace.xml
-.idea/tasks.xml
+.idea/taskEntities.xml
 .idea/.name
 .idea/compiler.xml
 .idea/copyright/profiles_settings.xml

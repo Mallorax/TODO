@@ -1,30 +1,38 @@
 package pl.patrykzygo.todo.repository
 
 import androidx.lifecycle.LiveData
-import pl.patrykzygo.todo.database.Task
+import androidx.lifecycle.Transformations
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.withContext
+import org.intellij.lang.annotations.Flow
 import pl.patrykzygo.todo.database.TaskDatabase
+import pl.patrykzygo.todo.database.TaskDatabaseDao
+import pl.patrykzygo.todo.database.asDomainModel
+import pl.patrykzygo.todo.domain.Task
+import pl.patrykzygo.todo.domain.toDatabaseEntity
 
-class RoomRepositoryImpl(private val db: TaskDatabase): TaskRepository {
+open class RoomRepositoryImpl(private val dao: TaskDatabaseDao): TaskRepository {
 
-
-
-    override fun insertTask(vararg tasks: Task) {
-        db.taskDatabaseDao.insert(*tasks)
+    override suspend fun insertTask(vararg tasks: Task) {
+        dao.insert(*tasks.map { it.toDatabaseEntity() }.toTypedArray())
     }
 
-    override fun receiveAllTasks(): LiveData<List<Task>> {
-        return db.taskDatabaseDao.getAll()
+    override suspend fun receiveAllTasks(): List<Task> =
+        dao.getAll().map { it.asDomainModel() }
+
+
+
+    override suspend fun getTaskWithId(id: Long): Task =
+        dao.getWithId(id).asDomainModel()
+
+    override suspend fun deleteSpecificTasks(vararg tasks: Task) {
+        dao.deleteTasks(*tasks.map { it.toDatabaseEntity() }.toTypedArray())
     }
 
-    override fun getTaskWithId(id: Long): LiveData<Task> {
-        return db.taskDatabaseDao.getWithId(id)
-    }
-
-    override fun deleteSpecificTasks(vararg tasks: Task) {
-        db.taskDatabaseDao.deleteTasks(*tasks)
-    }
-
-    override fun clearAllTasks() {
-        db.taskDatabaseDao.deleteAllTasks()
+    override suspend fun clearAllTasks() {
+        dao.clearAllTasks()
     }
 }

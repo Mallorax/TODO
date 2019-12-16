@@ -1,14 +1,16 @@
 package pl.patrykzygo.todo.repository
 
 import androidx.lifecycle.LiveData
-import pl.patrykzygo.todo.database.Task
+import kotlinx.coroutines.flow.Flow
+import pl.patrykzygo.todo.database.TaskEntity
+import pl.patrykzygo.todo.domain.Task
 
 interface TaskRepository {
 
-    fun insertTask(vararg tasks: Task)
-    fun receiveAllTasks():LiveData<List<Task>>
-    fun getTaskWithId(id: Long):LiveData<Task>
-    fun deleteSpecificTasks(vararg tasks: Task)
-    fun clearAllTasks()
+    suspend fun insertTask(vararg tasks: Task)
+    suspend fun receiveAllTasks(): List<Task>
+    suspend fun getTaskWithId(id: Long): Task
+    suspend fun deleteSpecificTasks(vararg tasks: Task)
+    suspend fun clearAllTasks()
 
 }
