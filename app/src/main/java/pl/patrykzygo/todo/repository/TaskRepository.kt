@@ -9,7 +9,7 @@ interface TaskRepository {
 
     suspend fun insertTask(vararg tasks: Task)
     suspend fun receiveAllTasks(): List<Task>
-    suspend fun getTaskWithId(id: Long):Flow<Task>
+    suspend fun getTaskWithId(id: Long): Task
     suspend fun deleteSpecificTasks(vararg tasks: Task)
     suspend fun clearAllTasks()
 

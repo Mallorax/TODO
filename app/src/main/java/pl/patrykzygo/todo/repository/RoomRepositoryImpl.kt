@@ -17,7 +17,7 @@ import pl.patrykzygo.todo.domain.toDatabaseEntity
 open class RoomRepositoryImpl(private val dao: TaskDatabaseDao): TaskRepository {
 
     override suspend fun insertTask(vararg tasks: Task) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        dao.insert(*tasks.map { it.toDatabaseEntity() }.toTypedArray())
     }
 
     override suspend fun receiveAllTasks(): List<Task> =
@@ -25,15 +25,14 @@ open class RoomRepositoryImpl(private val dao: TaskDatabaseDao): TaskRepository 
 
 
 
-    override suspend fun getTaskWithId(id: Long): kotlinx.coroutines.flow.Flow<Task> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override suspend fun getTaskWithId(id: Long): Task =
+        dao.getWithId(id).asDomainModel()
 
     override suspend fun deleteSpecificTasks(vararg tasks: Task) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        dao.deleteTasks(*tasks.map { it.toDatabaseEntity() }.toTypedArray())
     }
 
     override suspend fun clearAllTasks() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        dao.clearAllTasks()
     }
 }
