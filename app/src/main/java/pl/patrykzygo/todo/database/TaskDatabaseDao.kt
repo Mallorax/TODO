@@ -1,6 +1,7 @@
 package pl.patrykzygo.todo.database
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import androidx.room.OnConflictStrategy.REPLACE
 import kotlinx.coroutines.flow.Flow
@@ -13,10 +14,10 @@ interface TaskDatabaseDao {
     suspend fun insert(vararg task: TaskEntity)
 
     @Query("SELECT * FROM tasks_table")
-    suspend fun getAll(): List<TaskEntity>
+    fun getAll(): LiveData<List<TaskEntity>>
 
     @Query("SELECT * FROM tasks_table WHERE id = :id")
-    suspend fun getWithId(id: Long): TaskEntity
+    fun getWithId(id: Long): LiveData<TaskEntity>
 
     @Delete
     suspend fun deleteTasks(vararg tasks: TaskEntity)

@@ -1,6 +1,7 @@
 package pl.patrykzygo.todo.repository
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.asFlow
@@ -20,13 +21,18 @@ open class RoomRepositoryImpl(private val dao: TaskDatabaseDao): TaskRepository 
         dao.insert(*tasks.map { it.toDatabaseEntity() }.toTypedArray())
     }
 
-    override suspend fun receiveAllTasks(): List<Task> =
-        dao.getAll().map { it.asDomainModel() }
+    override fun receiveAllTasks(): LiveData<List<Task>> {
+        return Transformations.map(dao.getAll()) {
+            it.map { t -> t.asDomainModel() }
+        }
+    }
 
 
-
-    override suspend fun getTaskWithId(id: Long): Task =
-        dao.getWithId(id).asDomainModel()
+    override fun getTaskWithId(id: Long): LiveData<Task> {
+        return Transformations.map(dao.getWithId(id)) {
+            it.asDomainModel()
+        }
+    }
 
     override suspend fun deleteSpecificTasks(vararg tasks: Task) {
         dao.deleteTasks(*tasks.map { it.toDatabaseEntity() }.toTypedArray())

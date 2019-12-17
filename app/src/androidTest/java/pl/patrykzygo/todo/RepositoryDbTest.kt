@@ -41,7 +41,7 @@ class RepositoryDbTest {
         db = Room.inMemoryDatabaseBuilder(
             context, TaskDatabase::class.java
         ).allowMainThreadQueries().build()
-        repo = spyk(RoomRepositoryImpl(db))
+        repo = spyk(RoomRepositoryImpl(db.taskDatabaseDao))
     }
 
     @After
@@ -52,7 +52,9 @@ class RepositoryDbTest {
 
     @Test
     fun receiveAllTasksTest() {
-        db.taskDatabaseDao.insert(*testData.toTypedArray())
+        runBlocking {
+            db.taskDatabaseDao.insert(*testData.toTypedArray())
+        }
         val result = runBlocking {
             repo.receiveAllTasks()
         }.blockingObserve()
@@ -62,9 +64,12 @@ class RepositoryDbTest {
 
     @Test
     fun getWithIdTest(){
-        db.taskDatabaseDao.insert(*testData.toTypedArray())
-        val result = runBlocking { repo.getTaskWithId(3).blockingObserve() }
-        assertEquals(3, result!!.taskId)
+        runBlocking {
+            db.taskDatabaseDao.insert(*testData.toTypedArray())
+        }
+            val result = runBlocking { repo.getTaskWithId(3).blockingObserve() }
+            assertEquals(3, result!!.taskId)
+
     }
 
 
