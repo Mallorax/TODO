@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -14,7 +13,6 @@ import pl.patrykzygo.todo.R
 import pl.patrykzygo.todo.database.NotificationType
 import pl.patrykzygo.todo.databinding.AddTaskFragmentBinding
 import pl.patrykzygo.todo.domain.Task
-import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -53,8 +51,8 @@ class AddTaskFragment : Fragment() {
         var task: Task
         var validated = checkNoEmptyFields(getString(R.string.field_required_message))
         if (validated) {
-            task = getTaskFromFields()
-            if (validateDateInput(task.date)) {
+            task = readTaskFromInput()
+            if (checkValidDate(task.date)) {
                 viewModel.insertNewTask(task)
                 Snackbar.make(v, "New task " +task.name+ " inserted with reminder " +task.notificationType, Snackbar.LENGTH_LONG).show()
             }
@@ -75,27 +73,8 @@ class AddTaskFragment : Fragment() {
         }
     }
 
-
-    private fun formatIntoCalendar(date: String, time: String): Calendar? {
-        var c = Calendar.getInstance()
-        return if (date != "" && time != ""){
-            val cString = "$date $time"
-            c.time = SimpleDateFormat("dd/MM/yyyy HH:mm").parse(cString)
-            c
-        }else if (date != "" && time == ""){
-            c.time = SimpleDateFormat("dd/MM/yyyy").parse(date)
-            c.set(Calendar.MINUTE, 1)
-            c
-        }else if (date == "" && time != ""){
-            c.set(Calendar.YEAR, 1970)
-            c.time = SimpleDateFormat("HH:mm").parse(time)
-            c
-        }else {
-            null
-        }
-    }
-    private fun getTaskFromFields(): Task {
-        val c = formatIntoCalendar(
+    private fun readTaskFromInput(): Task {
+        val c = viewModel.formatIntoCalendar(
             binding.taskDateLayout.editText?.text.toString(),
             binding.taskTimeLayout.editText?.text.toString()
         )
@@ -109,16 +88,15 @@ class AddTaskFragment : Fragment() {
         )
     }
 
-    private fun validateDateInput(selectedDate: Calendar?):Boolean{
-        if (selectedDate == null) return true
-        val currentDate = Calendar.getInstance()
-        return if (selectedDate.before(currentDate)){
+    private fun checkValidDate(selectedDate: Calendar?): Boolean{
+        return if (!viewModel.validateDateInput(selectedDate)){
             binding.taskDateLayout.editText?.error = getString(R.string.date_pick_error_msg)
             false
         }else{
             true
         }
     }
+
 
     private fun checkNoEmptyFields(error: String): Boolean {
         var isNameValid = binding.taskNameInputLayout.editText?.text?.isNotEmpty()
