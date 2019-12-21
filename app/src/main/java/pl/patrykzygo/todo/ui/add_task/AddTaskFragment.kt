@@ -18,8 +18,6 @@ import java.util.*
 
 class AddTaskFragment : Fragment() {
 
-    //TODO: There are functions that should be in viewModel -> move them
-
     private val viewModel: AddTaskViewModel by lazy {
         ViewModelProviders.of(this).get(AddTaskViewModel::class.java)
     }
