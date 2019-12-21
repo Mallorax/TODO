@@ -42,11 +42,11 @@ class AddTaskViewModel(application: Application) : AndroidViewModel(application)
             c
         }else if (date != "" && time == ""){
             c.time = SimpleDateFormat("dd/MM/yyyy").parse(date)
-            c.set(Calendar.MINUTE, 1)
+            c.clear(Calendar.SECOND)
             c
         }else if (date == "" && time != ""){
-            c.set(Calendar.YEAR, 1970)
             c.time = SimpleDateFormat("HH:mm").parse(time)
+            c.clear(Calendar.YEAR)
             c
         }else {
             null
@@ -55,8 +55,9 @@ class AddTaskViewModel(application: Application) : AndroidViewModel(application)
 
     fun validateDateInput(selectedDate: Calendar?):Boolean{
         if (selectedDate == null) return true
+        if(!selectedDate.isSet(Calendar.YEAR)) return true
         val currentDate = Calendar.getInstance()
-        return !selectedDate.before(currentDate)
+        return (!selectedDate.before(currentDate) || selectedDate == currentDate)
     }
 
 
