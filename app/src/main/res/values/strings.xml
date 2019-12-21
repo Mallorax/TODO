@@ -16,4 +16,5 @@
     <string name="pick_date_string">Pick a date</string>
     <string name="field_required_message">Field required</string>
     <string name="no_alarm">No alarm</string>
+    <string name="date_pick_error_msg">Can\'t select date before today</string>
 </resources>

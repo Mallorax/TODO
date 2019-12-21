@@ -21,7 +21,6 @@ import java.util.*
 class AddTaskFragment : Fragment() {
 
     //TODO: There are functions that should be in viewModel -> move them
-    //TODO: Make validation for a date fields -> No date pre-current date allowed
 
     private val viewModel: AddTaskViewModel by lazy {
         ViewModelProviders.of(this).get(AddTaskViewModel::class.java)
@@ -55,8 +54,10 @@ class AddTaskFragment : Fragment() {
         var validated = checkNoEmptyFields(getString(R.string.field_required_message))
         if (validated) {
             task = getTaskFromFields()
-            viewModel.insertNewTask(task)
-            Snackbar.make(v, "New task " +task.name+ " inserted with reminder " +task.notificationType, Snackbar.LENGTH_LONG).show()
+            if (validateDateInput(task.date)) {
+                viewModel.insertNewTask(task)
+                Snackbar.make(v, "New task " +task.name+ " inserted with reminder " +task.notificationType, Snackbar.LENGTH_LONG).show()
+            }
         } else {
             return
         }
@@ -106,6 +107,17 @@ class AddTaskFragment : Fragment() {
             binding.taskPriorityEditText.text.toString().toInt(),
             binding.taskTagInputEditText.text.toString()
         )
+    }
+
+    private fun validateDateInput(selectedDate: Calendar?):Boolean{
+        if (selectedDate == null) return true
+        val currentDate = Calendar.getInstance()
+        return if (selectedDate.before(currentDate)){
+            binding.taskDateLayout.editText?.error = getString(R.string.date_pick_error_msg)
+            false
+        }else{
+            true
+        }
     }
 
     private fun checkNoEmptyFields(error: String): Boolean {
