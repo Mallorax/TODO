@@ -2,8 +2,6 @@ package pl.patrykzygo.todo.domain
 
 
 import pl.patrykzygo.todo.database.TaskEntity
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 data class Task(
@@ -14,7 +12,7 @@ data class Task(
 
     var description: String,
 
-    var date: Calendar?,
+    var date: Timestamp?,
 
     var hasNotification: Boolean,
 
@@ -38,25 +36,20 @@ data class Task(
                     this.tag == other.tag
         }
     }
+
+    fun toDbModel():TaskEntity{
+        return TaskEntity(
+            this.taskId,
+            this.name,
+            this.description,
+            this.date?.toDbModel(),
+            this.hasNotification,
+            this.notificationType,
+            this.priority,
+            this.tag
+        )
+    }
 }
 
-fun Task.toDatabaseEntity():TaskEntity{
-    return TaskEntity(
-        this.taskId,
-        this.name,
-        this.description,
-        let {
-            if(it.date != null) {
-                val format = SimpleDateFormat("dd/MM/yyyy HH:mm")
-                format.format(date?.time)
-            }else{
-                ""
-            }
-        },
-        this.hasNotification,
-        this.notificationType,
-        this.priority,
-        this.tag
-    )
-}
+
 

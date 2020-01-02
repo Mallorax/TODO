@@ -6,7 +6,6 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import io.mockk.*
-import io.mockk.impl.annotations.MockK
 import io.mockk.impl.annotations.SpyK
 import kotlinx.coroutines.runBlocking
 import org.junit.After
@@ -17,7 +16,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import pl.patrykzygo.todo.database.TaskDatabase
-import pl.patrykzygo.todo.database.asDomainModel
+import pl.patrykzygo.todo.database.toDomainModel
 import pl.patrykzygo.todo.repository.RoomRepositoryImpl
 import pl.patrykzygo.todo.repository.TaskRepository
 
@@ -58,7 +57,7 @@ class RepositoryDbTest {
         val result = runBlocking {
             repo.receiveAllTasks()
         }.blockingObserve()
-        assertEquals(result!![4], testData[4].asDomainModel())
+        assertEquals(result!![4], testData[4].toDomainModel())
 
     }
 
@@ -75,7 +74,7 @@ class RepositoryDbTest {
 
     @Test
     fun insertTaskTest() {
-        val data = testData.map { t -> t.asDomainModel() }.toTypedArray()
+        val data = testData.map { t -> t.toDomainModel() }.toTypedArray()
         runBlocking {
             repo.insertTask(*data)
         }

@@ -1,64 +1,53 @@
 package pl.patrykzygo.todo.database
 
 import androidx.room.ColumnInfo
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import pl.patrykzygo.todo.domain.Task
-import java.text.DateFormat
-import java.text.SimpleDateFormat
-import java.time.format.DateTimeFormatter
-import java.util.*
 
 @Entity(tableName = "tasks_table")
 data class TaskEntity (
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
+    @ColumnInfo(name = "task_id")
     val taskId: Long = 0L,
 
-    @ColumnInfo(name = "title")
+    @ColumnInfo(name = "task_title")
     var title: String,
 
-    @ColumnInfo(name = "description")
+    @ColumnInfo(name = "task_description")
     var description: String,
 
-    @ColumnInfo(name = "date")
-    var date: String,
+    @Embedded
+    var date: TimestampDbModel?,
 
-    @ColumnInfo(name = "has_notification")
+    @ColumnInfo(name = "task_has_notification")
     var hasNotification: Boolean,
 
-    @ColumnInfo(name = "notification_type")
+    @ColumnInfo(name = "task_notification_type")
     var notificationType: String,
 
-    @ColumnInfo(name = "priority")
+    @ColumnInfo(name = "task_priority")
     var priority: Int,
 
-    @ColumnInfo(name = "tag")
+    @ColumnInfo(name = "task_tag")
     var tag: String
-)
+) {
 
 
-//TODO: Seems like during conversion the info about whether the field in calendar was set or not gets lost have to fix that
-fun TaskEntity.asDomainModel(): Task{
-    return Task(
-        this.taskId,
-        this.title,
-        this.description,
-        let { databaseModel ->
-            if(databaseModel.date == ""){
-                null
-            }else {
-                Calendar.getInstance().also {calendar ->
-                    calendar.time = (SimpleDateFormat("dd/MM/yyyy HH:mm").parse(this.date))
-                }
-            }
-        },
-        this.hasNotification,
-        this.notificationType,
-        this.priority,
-        this.tag
-    )
+    //TODO: Seems like during conversion the info about whether the field in calendar was set or not gets lost have to fix that
+    fun toDomainModel(): Task {
+        return Task(
+            this.taskId,
+            this.title,
+            this.description,
+            this.date?.toDomainModel(),
+            this.hasNotification,
+            this.notificationType,
+            this.priority,
+            this.tag
+        )
+    }
+
 }
-
-
