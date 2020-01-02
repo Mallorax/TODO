@@ -3,9 +3,8 @@ package pl.patrykzygo.todo.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import pl.patrykzygo.todo.database.TaskDatabaseDao
-import pl.patrykzygo.todo.database.toDomainModel
 import pl.patrykzygo.todo.domain.Task
-import pl.patrykzygo.todo.domain.toDatabaseEntity
+
 
 open class RoomRepositoryImpl(private val dao: TaskDatabaseDao): TaskRepository {
 

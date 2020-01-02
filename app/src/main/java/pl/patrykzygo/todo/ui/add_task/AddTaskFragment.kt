@@ -13,6 +13,7 @@ import pl.patrykzygo.todo.R
 import pl.patrykzygo.todo.database.NotificationType
 import pl.patrykzygo.todo.databinding.AddTaskFragmentBinding
 import pl.patrykzygo.todo.domain.Task
+import pl.patrykzygo.todo.domain.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -72,7 +73,7 @@ class AddTaskFragment : Fragment() {
     }
 
     private fun readTaskFromInput(): Task {
-        val c = viewModel.formatIntoCalendar(
+        val timestamp = viewModel.formatIntoTimestamp(
             binding.taskDateLayout.editText?.text.toString(),
             binding.taskTimeLayout.editText?.text.toString()
         )
@@ -80,13 +81,13 @@ class AddTaskFragment : Fragment() {
         return Task(
             0, binding.taskNameInputEditText.text.toString(),
             binding.taskDescriptionInput.text.toString(),
-            c, true, notificationType,
+            timestamp, true, notificationType,
             binding.taskPriorityEditText.text.toString().toInt(),
             binding.taskTagInputEditText.text.toString()
         )
     }
 
-    private fun checkValidDate(selectedDate: Calendar?): Boolean{
+    private fun checkValidDate(selectedDate: Timestamp?): Boolean{
         return if (!viewModel.validateDateInput(selectedDate)){
             binding.taskDateLayout.editText?.error = getString(R.string.date_pick_error_msg)
             false
@@ -95,7 +96,7 @@ class AddTaskFragment : Fragment() {
         }
     }
 
-
+    //TODO: Think it should be ina viewmodel
     private fun checkNoEmptyFields(error: String): Boolean {
         var isNameValid = binding.taskNameInputLayout.editText?.text?.isNotEmpty()
         var isTagValid = binding.taskTagInputLayout.editText?.text?.isNotEmpty()

@@ -4,6 +4,7 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import pl.patrykzygo.todo.domain.Task
+import pl.patrykzygo.todo.domain.Timestamp
 import pl.patrykzygo.todo.ui.task_list.TasksListAdapter
 import java.text.SimpleDateFormat
 import java.util.*
@@ -16,31 +17,29 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<Task>?) {
 }
 
 @BindingAdapter("taskDate")
-fun bindTaskDate(textView: TextView, calendar: Calendar?) {
-    if (calendar != null) {
-        if (!calendar.isSet(Calendar.SECOND)) {
-            textView.text = "---"
-        } else {
+fun bindTaskDate(textView: TextView, timestamp: Timestamp?) {
+    if (timestamp != null) {
+        if (timestamp.isDateSet) {
             val dateFormat = SimpleDateFormat("dd/MM/yyyy")
-            val dateString = dateFormat.format(calendar.time)
+            val dateString = dateFormat.format(timestamp.timestampDate.time)
             textView.text = dateString
+        } else {
+            textView.text = "---"
         }
     } else {
         textView.text = "---"
     }
 }
 
-//TODO: Needs to be changed as if someone would try to set min to 1, it will not be displayed
 @BindingAdapter("taskTime")
-fun bindTaskTime(textView: TextView, calendar: Calendar?) {
-    if (calendar != null) {
-        if (!calendar.isSet(Calendar.YEAR)) {
-            textView.text = "---"
-
-        } else {
+fun bindTaskTime(textView: TextView, timestamp: Timestamp?) {
+    if (timestamp != null) {
+        if (timestamp.isTimeSet) {
             val dateFormat = SimpleDateFormat("HH:mm")
-            val timeString = dateFormat.format(calendar.time)
+            val timeString = dateFormat.format(timestamp.timestampDate.time)
             textView.text = timeString
+        } else {
+            textView.text = "---"
         }
     } else {
         textView.text = "---"

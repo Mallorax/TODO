@@ -6,9 +6,11 @@ import kotlinx.coroutines.*
 import pl.patrykzygo.todo.R
 import pl.patrykzygo.todo.database.TaskDatabase
 import pl.patrykzygo.todo.domain.Task
+import pl.patrykzygo.todo.domain.Timestamp
 import pl.patrykzygo.todo.repository.RoomRepositoryImpl
 import pl.patrykzygo.todo.repository.TaskRepository
 import java.lang.NullPointerException
+import java.sql.Time
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -34,30 +36,37 @@ class AddTaskViewModel(application: Application) : AndroidViewModel(application)
         _date.value = date
     }
 
-    fun formatIntoCalendar(date: String, time: String): Calendar? {
-        var c = Calendar.getInstance()
-        return if (date != "" && time != ""){
+    fun formatIntoTimestamp(date: String, time: String): Timestamp {
+        val c = Calendar.getInstance()
+        var isDateSet = false
+        var isTimeSet = false
+        if(date !="" && time != ""){
             val cString = "$date $time"
             c.time = SimpleDateFormat("dd/MM/yyyy HH:mm").parse(cString)
-            c
+            isDateSet = true
+            isTimeSet = true
         }else if (date != "" && time == ""){
             c.time = SimpleDateFormat("dd/MM/yyyy").parse(date)
-            c.clear(Calendar.SECOND)
-            c
+            isDateSet = true
+            isTimeSet = false
         }else if (date == "" && time != ""){
             c.time = SimpleDateFormat("HH:mm").parse(time)
-            c.clear(Calendar.YEAR)
-            c
-        }else {
-            null
+            isDateSet = false
+            isTimeSet = true
         }
+        return Timestamp(
+            Timestamp.NONE,
+            c,
+            isDateSet,
+            isTimeSet
+        )
     }
 
-    fun validateDateInput(selectedDate: Calendar?):Boolean{
+    fun validateDateInput(selectedDate: Timestamp?):Boolean{
         if (selectedDate == null) return true
-        if(!selectedDate.isSet(Calendar.YEAR)) return true
+        if(!selectedDate.isDateSet) return true
         val currentDate = Calendar.getInstance()
-        return (!selectedDate.before(currentDate) || selectedDate == currentDate)
+        return (!selectedDate.timestampDate.before(currentDate) || selectedDate.timestampDate == currentDate)
     }
 
 

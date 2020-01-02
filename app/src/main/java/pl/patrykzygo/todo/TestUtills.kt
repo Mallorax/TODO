@@ -3,6 +3,8 @@ package pl.patrykzygo.todo
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import pl.patrykzygo.todo.database.TaskEntity
+import pl.patrykzygo.todo.database.TimestampDbModel
+import pl.patrykzygo.todo.domain.Timestamp
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
@@ -34,7 +36,11 @@ fun createRandomTasks(count: Int): List<TaskEntity>{
                 0,
                 getRandomString((0..count).random()),
                 getRandomString((0..count).random()),
-                SimpleDateFormat("dd/MM/yyyy hh:mm").format(randomDate().time),
+                TimestampDbModel(Timestamp.NONE,
+                    SimpleDateFormat("dd/MM/yyyy hh:mm").format(randomDate().time),
+                    isDateSet = false,
+                    isTimeSet = false
+                ),
                 Random.nextBoolean(),
                 getRandomString((0..count).random()),
                 (0..x).random(),
