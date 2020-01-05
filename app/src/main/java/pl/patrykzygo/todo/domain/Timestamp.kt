@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 data class Timestamp(
-    var repetition: String = NONE,
+    var cycle: String = NONE,
     var timestampDate: Calendar,
     var isDateSet: Boolean = false,
     var isTimeSet: Boolean = false
@@ -21,7 +21,7 @@ data class Timestamp(
 
     fun toDbModel():TimestampDbModel{
         return TimestampDbModel(
-            this.repetition,
+            this.cycle,
             let{
                 val format = SimpleDateFormat("dd/MM/yyyy HH:mm")
                 format.format(it.timestampDate.time)
