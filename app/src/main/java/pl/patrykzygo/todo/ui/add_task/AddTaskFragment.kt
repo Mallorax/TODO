@@ -33,6 +33,7 @@ class AddTaskFragment : Fragment() {
         setHasOptionsMenu(true)
 
         binding = AddTaskFragmentBinding.inflate(inflater)
+        binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
 

@@ -30,19 +30,18 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:text="task_name"
+            android:text="@{viewModel.task.name}"
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="@+id/name_label"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toTopOf="@+id/name_label"
-            tools:ignore="HardcodedText" />
+            app:layout_constraintTop_toTopOf="@+id/name_label" />
 
         <View
             android:id="@+id/first_divider"
             style="@style/Divider"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -53,7 +52,7 @@
             android:id="@+id/date_label"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:text="@string/date_label"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@+id/name_label"
@@ -77,18 +76,19 @@
             android:layout_marginBottom="8dp"
             android:text="task_date"
             android:textAlignment="center"
+            app:taskDate="@{viewModel.task.date}"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/date_label"
             app:layout_constraintEnd_toEndOf="@+id/task_name_label"
             app:layout_constraintStart_toStartOf="@+id/task_name_label"
-            app:layout_constraintTop_toTopOf="@+id/date_label"
-            tools:ignore="HardcodedText" />
+            app:layout_constraintTop_toTopOf="@+id/date_label" />
 
         <TextView
             android:id="@+id/task_time_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            taskTime="@{viewModel.task.date}"
             android:layout_marginEnd="8dp"
             android:text="task_time"
             android:textAlignment="center"
@@ -96,14 +96,13 @@
             app:layout_constraintBottom_toBottomOf="@+id/time_label"
             app:layout_constraintEnd_toEndOf="@+id/task_date_string"
             app:layout_constraintStart_toStartOf="@+id/task_date_string"
-            app:layout_constraintTop_toTopOf="@+id/time_label"
-            tools:ignore="HardcodedText" />
+            app:layout_constraintTop_toTopOf="@+id/time_label" />
 
         <View
             android:id="@+id/second_divider"
             style="@style/Divider"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -120,7 +119,7 @@
             android:id="@+id/tag_label"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:text="@string/tag_label"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@+id/time_label"
@@ -140,7 +139,7 @@
             android:id="@+id/task_tag_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="task_tag"
+            android:text="@{viewModel.task.tag}"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/tag_label"
             app:layout_constraintEnd_toEndOf="@+id/task_time_label"
@@ -152,19 +151,18 @@
             android:id="@+id/task_priority_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="task_priority"
+            android:text="@{viewModel.task.priority}"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/priority_label"
             app:layout_constraintEnd_toEndOf="@+id/task_tag_label"
             app:layout_constraintStart_toStartOf="@+id/task_tag_label"
-            app:layout_constraintTop_toTopOf="@+id/priority_label"
-            tools:ignore="HardcodedText" />
+            app:layout_constraintTop_toTopOf="@+id/priority_label" />
 
         <View
             android:id="@+id/third_divider"
             style="@style/Divider"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -174,7 +172,7 @@
             android:id="@+id/notification_type_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:text="@string/notification_type_label"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@+id/priority_label"
@@ -185,14 +183,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="task_notification"
+            android:text="@{viewModel.task.notificationType}"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/notification_type_label"
             app:layout_constraintEnd_toEndOf="@id/task_priority_label"
             app:layout_constraintStart_toStartOf="@+id/task_priority_label"
             app:layout_constraintTop_toTopOf="@+id/notification_type_label"
-            app:layout_constraintVertical_bias="0.0"
-            tools:ignore="HardcodedText" />
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

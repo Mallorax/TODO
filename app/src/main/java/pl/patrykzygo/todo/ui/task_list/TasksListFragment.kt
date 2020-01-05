@@ -17,7 +17,6 @@ class TasksListFragment : Fragment(){
         ViewModelProviders.of(this).get(TaskListViewModel::class.java)
     }
 
-    //comment
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -26,8 +25,8 @@ class TasksListFragment : Fragment(){
         binding.lifecycleOwner = this
         binding.viewModel = listViewModel
         val adapter =
-            TasksListAdapter(TasksListAdapter.OnClickListener {
-                Snackbar.make(binding.root, it.taskId.toString(), Snackbar.LENGTH_LONG).show()
+            TasksListAdapter(TasksListAdapter.OnClickListener { task, view ->
+                view.findNavController().navigate(TasksListFragmentDirections.actionTasksListFragmentToTaskDetailsFragment(task.taskId))
             })
         binding.tasksRecycler.adapter = adapter
         binding.tasksRecycler.addItemDecoration(DividerItemDecoration(binding.tasksRecycler.context, DividerItemDecoration.VERTICAL))

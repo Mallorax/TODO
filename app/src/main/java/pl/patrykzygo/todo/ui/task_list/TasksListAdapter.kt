@@ -1,6 +1,7 @@
 package pl.patrykzygo.todo.ui.task_list
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -46,12 +47,12 @@ class TasksListAdapter(private val onClickListener: OnClickListener): ListAdapte
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val task = getItem(position)
         holder.itemView.setOnClickListener{
-            onClickListener.onClick(task)
+            onClickListener.onClick(task, holder.itemView)
         }
         holder.bind(task)
     }
 
-    class OnClickListener(val clickListener: (task: Task) -> Unit){
-        fun onClick(task: Task) = clickListener(task)
+    class OnClickListener(val clickListener: (task: Task, v: View) -> Unit){
+        fun onClick(task: Task, view: View) = clickListener(task, view)
     }
 }

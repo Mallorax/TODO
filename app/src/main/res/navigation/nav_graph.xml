@@ -15,28 +15,25 @@
         <action
             android:id="@+id/action_tasksListFragment_to_addTaskFragment"
             app:destination="@id/addTaskFragment" />
+        <action
+            android:id="@+id/action_tasksListFragment_to_taskDetailsFragment"
+            app:destination="@id/taskDetailsFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/addTaskFragment"
         android:name="pl.patrykzygo.todo.ui.add_task.AddTaskFragment"
         android:label="Add new task"
-        tools:layout="@layout/add_task_fragment">
-
-        <action
-            android:id="@+id/action_addTaskFragment_to_datePickerFragment"
-            app:destination="@id/datePickerFragment" />
-    </fragment>
+        tools:layout="@layout/add_task_fragment"/>
 
     <fragment
-        android:id="@+id/datePickerFragment"
-        android:name="pl.patrykzygo.todo.ui.add_task.DatePickerFragment"
-        android:label="@string/pick_date_string"
-        tools:layout="@layout/date_picker_dialog_layout">
-
-        <action
-            android:id="@+id/action_datePickerFragment_to_addTaskFragment"
-            app:destination="@id/addTaskFragment" />
+        android:id="@+id/taskDetailsFragment"
+        android:name="pl.patrykzygo.todo.ui.task_details.TaskDetailsFragment"
+        android:label="Task Details"
+        tools:layout="@layout/task_details_fragment">
+        <argument
+            android:name="taskId"
+            app:argType="long" />
     </fragment>
 
 </navigation>
