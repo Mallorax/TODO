@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="task_cycles">
+        <item>None</item>
+        <item>Every day</item>
+        <item>Every Week</item>
+        <item>Every month</item>
+        <item>Every Year</item>
+    </array>
+
+</resources>

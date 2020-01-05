@@ -19,4 +19,5 @@
     <string name="no_alarm">No alarm</string>
     <string name="date_pick_error_msg">Can\'t select date before today</string>
     <string name="cycle_alert_dialog_title">Choose cycle for your task </string>
+    <string name="cycle">Cycle</string>
 </resources>

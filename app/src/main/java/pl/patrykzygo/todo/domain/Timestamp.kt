@@ -12,11 +12,11 @@ data class Timestamp(
 ){
 
     companion object{
-        const val NONE = "none"
-        const val DAILY = "everyday"
-        const val WEEKLY = "every_week"
-        const val MONTHLY = "every_month"
-        const val YEARLY = "every_year"
+        const val NONE = "None"
+        const val DAILY = "Every day"
+        const val WEEKLY = "Every week"
+        const val MONTHLY = "Every month"
+        const val YEARLY = "Every year"
     }
 
     fun toDbModel():TimestampDbModel{
