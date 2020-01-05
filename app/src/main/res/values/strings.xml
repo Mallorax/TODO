@@ -20,4 +20,10 @@
     <string name="date_pick_error_msg">Can\'t select date before today</string>
     <string name="cycle_alert_dialog_title">Choose cycle for your task </string>
     <string name="cycle">Cycle</string>
+    <string name="name_label">Name:</string>
+    <string name="date_label">Date:</string>
+    <string name="time_label">Time:</string>
+    <string name="tag_label">Tag:</string>
+    <string name="priority_level_label">Priority level:</string>
+    <string name="notification_type_label">Notification type:</string>
 </resources>

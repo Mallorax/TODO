@@ -151,7 +151,7 @@
             android:id="@+id/task_priority_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.task.priority}"
+            android:text="@{Integer.toString(viewModel.task.priority)}"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/priority_label"
             app:layout_constraintEnd_toEndOf="@+id/task_tag_label"
