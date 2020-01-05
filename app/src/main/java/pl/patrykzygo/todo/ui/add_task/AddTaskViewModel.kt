@@ -73,7 +73,6 @@ class AddTaskViewModel(application: Application) : AndroidViewModel(application)
         super.onCleared()
     }
 
-    //TODO: Should be done even if viewModel gets destroyed, so move it into lower layer
     fun insertNewTask(task: Task) {
         GlobalScope.launch {
             tasksRepo.insertTask(task)

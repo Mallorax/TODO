@@ -16,13 +16,13 @@
             android:id="@+id/tasks_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:taskList="@{viewModel.allTasks}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:listitem="@layout/task_list_item"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:taskList="@{viewModel.allTasks}"
+            tools:listitem="@layout/task_list_item" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/add_task_action_button"

@@ -97,7 +97,6 @@ class AddTaskFragment : Fragment() {
         }
     }
 
-    //TODO: Think it should be ina viewmodel
     private fun checkNoEmptyFields(error: String): Boolean {
         var isNameValid = binding.taskNameInputLayout.editText?.text?.isNotEmpty()
         var isTagValid = binding.taskTagInputLayout.editText?.text?.isNotEmpty()
