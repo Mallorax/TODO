@@ -10,6 +10,7 @@ import pl.patrykzygo.todo.domain.Timestamp
 import pl.patrykzygo.todo.repository.RoomRepositoryImpl
 import pl.patrykzygo.todo.repository.TaskRepository
 import java.lang.NullPointerException
+import java.lang.StringBuilder
 import java.sql.Time
 import java.text.SimpleDateFormat
 import java.util.*
@@ -20,6 +21,10 @@ class AddTaskViewModel(application: Application) : AndroidViewModel(application)
     private val tasksRepo: TaskRepository = RoomRepositoryImpl(database.taskDatabaseDao)
 
 
+    private val _cycle = MutableLiveData<String>()
+    val cycle: LiveData<String>
+        get() = _cycle
+
     private val _date = MutableLiveData<Calendar>()
     val date: LiveData<Calendar>
         get() = _date
@@ -28,15 +33,9 @@ class AddTaskViewModel(application: Application) : AndroidViewModel(application)
     val time: LiveData<Calendar>
         get() = _time
 
-    fun setTime(time: Calendar) {
-        _time.value = time
-    }
 
-    fun setDate(date: Calendar) {
-        _date.value = date
-    }
 
-    fun formatIntoTimestamp(date: String, time: String): Timestamp {
+    fun formatIntoTimestamp(date: String, time: String, cycle: String): Timestamp {
         val c = Calendar.getInstance()
         var isDateSet = false
         var isTimeSet = false
@@ -55,7 +54,7 @@ class AddTaskViewModel(application: Application) : AndroidViewModel(application)
             isTimeSet = true
         }
         return Timestamp(
-            Timestamp.NONE,
+            cycle,
             c,
             isDateSet,
             isTimeSet
@@ -74,10 +73,21 @@ class AddTaskViewModel(application: Application) : AndroidViewModel(application)
         super.onCleared()
     }
 
-    //TODO: Should be done even if viewModel gets destroyed, so move it into lower layer
     fun insertNewTask(task: Task) {
         GlobalScope.launch {
             tasksRepo.insertTask(task)
         }
+    }
+
+    fun setCycle(cycle: String){
+        _cycle.value = cycle
+    }
+
+    fun setTime(time: Calendar) {
+        _time.value = time
+    }
+
+    fun setDate(date: Calendar) {
+        _date.value = date
     }
 }

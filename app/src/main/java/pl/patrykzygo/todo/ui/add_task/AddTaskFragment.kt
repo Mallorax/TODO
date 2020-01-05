@@ -76,7 +76,8 @@ class AddTaskFragment : Fragment() {
     private fun readTaskFromInput(): Task {
         val timestamp = viewModel.formatIntoTimestamp(
             binding.taskDateLayout.editText?.text.toString(),
-            binding.taskTimeLayout.editText?.text.toString()
+            binding.taskTimeLayout.editText?.text.toString(),
+            binding.taskCycleLayout.editText?.text.toString()
         )
         val notificationType = getSelectedNotificationType()
         return Task(
@@ -97,7 +98,6 @@ class AddTaskFragment : Fragment() {
         }
     }
 
-    //TODO: Think it should be ina viewmodel
     private fun checkNoEmptyFields(error: String): Boolean {
         var isNameValid = binding.taskNameInputLayout.editText?.text?.isNotEmpty()
         var isTagValid = binding.taskTagInputLayout.editText?.text?.isNotEmpty()
@@ -116,7 +116,14 @@ class AddTaskFragment : Fragment() {
 
     private fun setUpListeners() {
         binding.datePickerImage.setOnClickListener { showDatePickerDialog(it) }
+        binding.taskDateEditText.setOnClickListener { showDatePickerDialog(it) }
         binding.timePickerImage.setOnClickListener { showTimePickerDialog(it) }
+        binding.taskTimeEditText.setOnClickListener { showTimePickerDialog(it) }
+        binding.taskCycleEditText.setOnClickListener {showCycleAlertDialog(it)}
+    }
+
+    private fun showCycleAlertDialog(it: View) {
+        TaskCycleAlertDialog().show(childFragmentManager, "cycleAlertDialog")
     }
 
     private fun setUpObservers() {
@@ -126,6 +133,10 @@ class AddTaskFragment : Fragment() {
 
         viewModel.time.observe(viewLifecycleOwner, Observer {
             setDateAndTimeValues(binding.taskTimeEditText, it, "HH:mm")
+        })
+
+        viewModel.cycle.observe(viewLifecycleOwner, Observer {
+            binding.taskCycleEditText.setText(it)
         })
 
 

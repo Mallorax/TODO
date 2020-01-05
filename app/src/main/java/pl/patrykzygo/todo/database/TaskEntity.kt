@@ -36,7 +36,6 @@ data class TaskEntity (
 ) {
 
 
-    //TODO: Seems like during conversion the info about whether the field in calendar was set or not gets lost have to fix that
     fun toDomainModel(): Task {
         return Task(
             this.taskId,
