@@ -1,15 +1,21 @@
 package pl.patrykzygo.todo.ui.add_task
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import pl.patrykzygo.todo.R
+import pl.patrykzygo.todo.Services.AlarmReceiver
 import pl.patrykzygo.todo.database.NotificationType
 import pl.patrykzygo.todo.databinding.AddTaskFragmentBinding
 import pl.patrykzygo.todo.domain.Task
@@ -54,11 +60,28 @@ class AddTaskFragment : Fragment() {
             task = readTaskFromInput()
             if (checkValidDate(task.date)) {
                 viewModel.insertNewTask(task)
-                Snackbar.make(v, "New task " +task.name+ " inserted with reminder " +task.notificationType, Snackbar.LENGTH_LONG).show()
             }
         } else {
             return
         }
+        if (task.notificationType == NotificationType.NOTIFICATION_ALARM){
+            setAlarm(task.date!!.timestampDate.timeInMillis)
+        }
+    }
+
+    private fun setAlarm(time: Long){
+        var alarmManager: AlarmManager?
+        alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(context, AlarmReceiver::class.java)
+        var alarmIntent: PendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
+
+
+        alarmManager?.set(
+            AlarmManager.RTC_WAKEUP,
+            time,
+            alarmIntent
+        )
+        Toast.makeText(context, "Alarm set", Toast.LENGTH_LONG).show()
     }
 
     private fun getSelectedNotificationType(): String{
