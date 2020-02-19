@@ -66,7 +66,14 @@ class AddTaskFragment : Fragment() {
         }
         if (task.notificationType == NotificationType.NOTIFICATION_ALARM){
             setAlarm(task.date!!.timestampDate.timeInMillis)
+        }else if (task.notificationType == NotificationType.NOTIFICATION_POPUP){
+            setNotification(task.date!!.timestampDate.timeInMillis)
         }
+    }
+
+    private fun setNotification(time: Long){
+        var alarmManager = context?.getSystemService(Context.ALARM_SERVICE)
+
     }
 
     private fun setAlarm(time: Long){

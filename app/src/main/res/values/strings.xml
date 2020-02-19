@@ -26,4 +26,6 @@
     <string name="tag_label">Tag:</string>
     <string name="priority_level_label">Priority level:</string>
     <string name="notification_type_label">Notification type:</string>
+    <string name="alarm_notification_channel">ALARM_CHANNEL</string>
+    <string name="alarm_channel_description">Test description for alarm notification channel</string>
 </resources>
