@@ -1,4 +1,4 @@
-package pl.patrykzygo.todo.Services
+package pl.patrykzygo.todo.services
 
 class AppNotificationChannels {
     companion object{

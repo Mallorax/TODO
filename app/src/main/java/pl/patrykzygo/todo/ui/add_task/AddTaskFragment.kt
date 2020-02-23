@@ -12,10 +12,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import pl.patrykzygo.todo.R
-import pl.patrykzygo.todo.Services.AlarmReceiver
+import pl.patrykzygo.todo.services.AlarmReceiver
 import pl.patrykzygo.todo.database.NotificationType
 import pl.patrykzygo.todo.databinding.AddTaskFragmentBinding
 import pl.patrykzygo.todo.domain.Task

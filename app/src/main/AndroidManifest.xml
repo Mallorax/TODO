@@ -22,9 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".Services.AlarmReceiver"
+        <receiver android:name=".services.AlarmReceiver"
             android:enabled="true"
-            android:exported="true"/>
+            android:exported="false"/>
     </application>
 
 </manifest>
