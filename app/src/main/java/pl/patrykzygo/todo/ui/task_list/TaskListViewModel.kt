@@ -18,12 +18,7 @@ class TaskListViewModel(application: Application): AndroidViewModel(application)
     private val tasksRepo: TaskRepository = RoomRepositoryImpl(database.taskDatabaseDao)
 
     val allTasks = tasksRepo.receiveAllTasks()
-
-    init {
-        viewModelScope.launch {
-            tasksRepo.clearAllTasks()
-        }
-    }
+    
 
 
     override fun onCleared() {
