@@ -35,5 +35,8 @@
             android:name="taskId"
             app:argType="long" />
     </fragment>
+    <action
+        android:id="@+id/action_global_taskDetailsFragment"
+        app:destination="@id/taskDetailsFragment" />
 
 </navigation>

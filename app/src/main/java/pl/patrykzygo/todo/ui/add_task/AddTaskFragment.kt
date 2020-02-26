@@ -5,6 +5,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.Layout
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import com.google.android.material.textfield.TextInputEditText
 import pl.patrykzygo.todo.R
 import pl.patrykzygo.todo.services.AlarmReceiver
@@ -20,6 +22,7 @@ import pl.patrykzygo.todo.database.NotificationType
 import pl.patrykzygo.todo.databinding.AddTaskFragmentBinding
 import pl.patrykzygo.todo.domain.Task
 import pl.patrykzygo.todo.domain.Timestamp
+import pl.patrykzygo.todo.ui.task_list.TasksListFragmentDirections
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -43,8 +46,6 @@ class AddTaskFragment : Fragment() {
         binding = AddTaskFragmentBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-
-
         setUpListeners()
         setUpObservers()
 
@@ -67,7 +68,7 @@ class AddTaskFragment : Fragment() {
             return
         }
         if (task.notificationType == NotificationType.NOTIFICATION_ALARM){
-            setAlarm(task.date!!.timestampDate.timeInMillis)
+            setAlarm(task.date!!.timestampDate.timeInMillis, task.taskId)
         }else if (task.notificationType == NotificationType.NOTIFICATION_POPUP){
             setNotification(task.date!!.timestampDate.timeInMillis)
         }
@@ -78,19 +79,20 @@ class AddTaskFragment : Fragment() {
 
     }
 
-    private fun setAlarm(time: Long){
-        var alarmManager: AlarmManager?
+    private fun setAlarm(time: Long, id: Long){
+        val alarmManager: AlarmManager?
         alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, AlarmReceiver::class.java)
-        var alarmIntent: PendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
+        intent.putExtra("id", id)
+        val alarmIntent: PendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
 
 
-        alarmManager?.set(
+        alarmManager.setExact(
             AlarmManager.RTC_WAKEUP,
             time,
             alarmIntent
         )
-        Toast.makeText(context, "Alarm set", Toast.LENGTH_LONG).show()
+        Toast.makeText(context, "Alarm set$id", Toast.LENGTH_LONG).show()
     }
 
     private fun getSelectedNotificationType(): String{
@@ -113,7 +115,7 @@ class AddTaskFragment : Fragment() {
         )
         val notificationType = getSelectedNotificationType()
         return Task(
-            0, binding.taskNameInputEditText.text.toString(),
+            binding.taskNameInputEditText.text.toString(),
             binding.taskDescriptionInput.text.toString(),
             timestamp, true, notificationType,
             binding.taskPriorityEditText.text.toString().toInt(),

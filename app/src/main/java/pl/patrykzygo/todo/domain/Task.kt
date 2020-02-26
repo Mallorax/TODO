@@ -2,12 +2,10 @@ package pl.patrykzygo.todo.domain
 
 
 import pl.patrykzygo.todo.database.TaskEntity
+import java.util.*
 
 
 data class Task(
-
-    val taskId: Long = 0L,
-
     var name: String,
 
     var description: String,
@@ -23,6 +21,9 @@ data class Task(
     var tag: String
 
 ){
+
+    var taskId: Long = System.currentTimeMillis()
+
     override fun equals(other: Any?): Boolean {
         return if (other == null || other !is Task){
             false

@@ -11,7 +11,7 @@ data class TaskEntity (
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "task_id")
-    val taskId: Long = 0L,
+    val taskId: Long,
 
     @ColumnInfo(name = "task_title")
     var title: String,
@@ -37,8 +37,7 @@ data class TaskEntity (
 
 
     fun toDomainModel(): Task {
-        return Task(
-            this.taskId,
+        var task = Task(
             this.title,
             this.description,
             this.date?.toDomainModel(),
@@ -47,6 +46,8 @@ data class TaskEntity (
             this.priority,
             this.tag
         )
+        task.taskId = this.taskId
+        return task
     }
 
 }

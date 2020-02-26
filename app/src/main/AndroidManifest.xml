@@ -25,7 +25,8 @@
         </activity>
         <receiver android:name=".services.AlarmReceiver"
             android:enabled="true"
-            android:exported="false"/>
+            android:exported="false"
+            android:directBootAware="true"/>
     </application>
 
 </manifest>
