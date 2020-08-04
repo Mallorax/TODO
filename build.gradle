@@ -6,6 +6,7 @@ buildscript {
         version_core = "1.0.1"
         version_coroutine = "1.1.0"
         version_constraint_layout = "2.0.0-beta3"
+        version_support = "28.0.0"
         version_gradle = '3.3.0'
         version_kotlin = "1.3.50"
         version_lifecycle_extensions = "2.1.0"
@@ -23,7 +24,7 @@ buildscript {
         
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.3'
+        classpath 'com.android.tools.build:gradle:4.0.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$version_kotlin"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$version_navigation"
         // NOTE: Do not place your application dependencies here; they belong
