@@ -49,6 +49,7 @@ dependencies {
 
     //support library
     implementation "com.android.support:support-compat:$version_support"
+    implementation "androidx.paging:paging-runtime-ktx:$version_paging"
 
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version_kotlin"

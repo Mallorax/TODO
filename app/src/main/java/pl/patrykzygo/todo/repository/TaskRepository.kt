@@ -2,6 +2,8 @@ package pl.patrykzygo.todo.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.paging.DataSource
+import androidx.paging.PagedList
 import kotlinx.coroutines.flow.Flow
 import pl.patrykzygo.todo.database.TaskEntity
 import pl.patrykzygo.todo.domain.Task
@@ -13,5 +15,6 @@ interface TaskRepository {
     fun getTaskWithId(id: Long): LiveData<Task>
     suspend fun deleteSpecificTasks(vararg tasks: Task)
     suspend fun clearAllTasks()
+    fun getAllTasksPaging(source: DataSource.Factory<Int, TaskEntity>): LiveData<PagedList<Task>>
 
 }
