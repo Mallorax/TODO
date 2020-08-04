@@ -114,9 +114,7 @@ class AddTaskFragment : Fragment() {
     }
 
     private fun setUpListeners() {
-        binding.datePickerImage.setOnClickListener { showDatePickerDialog(it) }
         binding.taskDateEditText.setOnClickListener { showDatePickerDialog(it) }
-        binding.timePickerImage.setOnClickListener { showTimePickerDialog(it) }
         binding.taskTimeEditText.setOnClickListener { showTimePickerDialog(it) }
         binding.taskCycleEditText.setOnClickListener {showCycleAlertDialog(it)}
     }

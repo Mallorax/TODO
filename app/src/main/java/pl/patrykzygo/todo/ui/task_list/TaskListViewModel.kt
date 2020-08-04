@@ -17,9 +17,8 @@ class TaskListViewModel(application: Application): AndroidViewModel(application)
     private val database = TaskDatabase.getInstance(application)
     private val tasksRepo: TaskRepository = RoomRepositoryImpl(database.taskDatabaseDao)
 
-    private val _allTasks = tasksRepo.receiveAllTasks()
-    val allTasks: LiveData<List<Task>>
-        get() = _allTasks
+    val allTasks = tasksRepo.receiveAllTasks()
+
 
 
     override fun onCleared() {
