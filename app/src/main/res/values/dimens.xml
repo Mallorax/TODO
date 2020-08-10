@@ -1,4 +1,5 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="padding">8dp</dimen>
+    <dimen name="tall_toolbar_height">56dp</dimen>
 </resources>
