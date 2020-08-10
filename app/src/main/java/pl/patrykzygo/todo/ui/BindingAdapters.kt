@@ -1,8 +1,10 @@
 package pl.patrykzygo.todo.ui
 
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import pl.patrykzygo.todo.R
 import pl.patrykzygo.todo.domain.Task
 import pl.patrykzygo.todo.domain.Timestamp
 import pl.patrykzygo.todo.ui.task_list.TasksListAdapter
@@ -47,6 +49,13 @@ fun bindTaskTime(textView: TextView, timestamp: Timestamp?) {
 }
 
 @BindingAdapter("taskPriority")
-fun bindTaskPriority(textView: TextView, task: Task) {
-    textView.text = task.priority.toString()
+fun bindTaskPriority(imageView: ImageView, priority: Int) {
+    when(priority){
+        1 -> imageView.setImageResource(R.drawable.ic_priority_1)
+        2 -> imageView.setImageResource(R.drawable.ic_priority_2)
+        3 -> imageView.setImageResource(R.drawable.ic_priority_3)
+        4 -> imageView.setImageResource(R.drawable.ic_priority_4)
+        5 -> imageView.setImageResource(R.drawable.ic_priority_5)
+        else -> imageView.setImageResource(R.drawable.baseline_error_24)
+    }
 }

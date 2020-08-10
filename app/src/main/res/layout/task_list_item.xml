@@ -16,104 +16,78 @@
 
         <TextView
             android:id="@+id/task_name"
-            android:textAlignment="center"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
             android:lines="1"
             android:text="@{bindedTask.name}"
-            app:layout_constraintBottom_toTopOf="@+id/task_tag"
-            app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toTopOf="parent"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/task_priority"
+            app:layout_constraintStart_toEndOf="@+id/task_priority"
+            app:layout_constraintTop_toTopOf="@+id/task_priority"
             tools:text="name of task" />
 
         <TextView
             android:id="@+id/task_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:lines="1"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
+            android:lines="1"
             android:textAlignment="center"
-            app:layout_constraintBottom_toTopOf="@+id/task_time"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/task_name"
+            app:layout_constraintTop_toBottomOf="@+id/task_name"
             app:taskDate="@{bindedTask.date}"
             tools:text="date" />
 
         <TextView
             android:id="@+id/task_time"
             android:layout_width="0dp"
-            android:lines="1"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
+            android:lines="1"
             android:textAlignment="center"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/task_date"
-            app:layout_constraintStart_toStartOf="@+id/task_date"
-            app:layout_constraintTop_toBottomOf="@+id/task_date"
+            app:layout_constraintBottom_toBottomOf="@+id/task_date"
+            app:layout_constraintStart_toEndOf="@+id/task_date"
+            app:layout_constraintTop_toTopOf="@+id/task_date"
             app:taskTime="@{bindedTask.date}"
             tools:text="time" />
 
         <TextView
             android:id="@+id/task_tag"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:lines="1"
-            android:textAlignment="center"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
+            android:lines="1"
             android:text="@{bindedTask.tag}"
+            android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/task_name"
-            app:layout_constraintStart_toStartOf="@+id/task_name"
-            app:layout_constraintTop_toBottomOf="@+id/task_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/task_name"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Task's tag" />
 
-        <TextView
+        <ImageView
             android:id="@+id/task_priority"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:lines="1"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:taskPriority="@{bindedTask}"
+            app:layout_constraintVertical_bias="0.01999998"
+            app:taskPriority="@{bindedTask.priority}"
+            tools:src="@drawable/ic_priority_1"
             tools:text="5" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.25" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="360dp"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.85"
-            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
