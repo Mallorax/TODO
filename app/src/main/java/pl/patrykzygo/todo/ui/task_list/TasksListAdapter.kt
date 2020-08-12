@@ -3,13 +3,13 @@ package pl.patrykzygo.todo.ui.task_list
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import pl.patrykzygo.todo.databinding.TaskListItemBinding
 import pl.patrykzygo.todo.domain.Task
 
-class TasksListAdapter(private val onClickListener: OnClickListener): ListAdapter<Task, TasksListAdapter.TaskViewHolder>(
+class TasksListAdapter(private val onClickListener: OnClickListener): PagedListAdapter<Task, TasksListAdapter.TaskViewHolder>(
     DiffCallback
 ) {
 
@@ -18,7 +18,7 @@ class TasksListAdapter(private val onClickListener: OnClickListener): ListAdapte
 
     class TaskViewHolder(private var binding: TaskListItemBinding)
         :RecyclerView.ViewHolder(binding.root){
-        fun bind(task: Task){
+        fun bind(task: Task?){
             binding.bindedTask = task
             binding.executePendingBindings()
         }
@@ -50,7 +50,7 @@ class TasksListAdapter(private val onClickListener: OnClickListener): ListAdapte
         holder.bind(task)
     }
 
-    class OnClickListener(val clickListener: (task: Task, v: View) -> Unit){
-        fun onClick(task: Task, view: View) = clickListener(task, view)
+    class OnClickListener(val clickListener: (task: Task?, v: View) -> Unit){
+        fun onClick(task: Task?, view: View) = clickListener(task, view)
     }
 }

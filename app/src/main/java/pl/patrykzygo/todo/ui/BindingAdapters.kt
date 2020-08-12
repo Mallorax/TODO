@@ -3,16 +3,16 @@ package pl.patrykzygo.todo.ui
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.RecyclerView
 import pl.patrykzygo.todo.R
 import pl.patrykzygo.todo.domain.Task
 import pl.patrykzygo.todo.domain.Timestamp
 import pl.patrykzygo.todo.ui.task_list.TasksListAdapter
 import java.text.SimpleDateFormat
-import java.util.*
 
 @BindingAdapter("taskList")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<Task>?) {
+fun bindRecyclerView(recyclerView: RecyclerView, data: PagedList<Task>?) {
     if (recyclerView.adapter is TasksListAdapter) {
         (recyclerView.adapter as TasksListAdapter).submitList(data)
     }

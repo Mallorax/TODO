@@ -15,6 +15,6 @@ interface TaskRepository {
     fun getTaskWithId(id: Long): LiveData<Task>
     suspend fun deleteSpecificTasks(vararg tasks: Task)
     suspend fun clearAllTasks()
-    fun getAllTasksPaging(source: DataSource.Factory<Int, TaskEntity>): LiveData<PagedList<Task>>
+    fun getAllTasksPaging(): LiveData<PagedList<Task>>
 
 }

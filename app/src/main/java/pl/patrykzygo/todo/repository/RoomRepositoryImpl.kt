@@ -23,10 +23,10 @@ open class RoomRepositoryImpl(private val dao: TaskDatabaseDao): TaskRepository 
     }
 
     //TODO: It's function for testing purposes
-    override fun getAllTasksPaging(source: DataSource.Factory<Int, TaskEntity>): LiveData<PagedList<Task>> {
-        return source
+    override fun getAllTasksPaging(): LiveData<PagedList<Task>> {
+        return dao.getAllPaging()
             .map { input -> input.toDomainModel() }
-            .toLiveData(10)
+            .toLiveData(15)
     }
 
     override fun getTaskWithId(id: Long): LiveData<Task> {

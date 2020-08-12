@@ -1,5 +1,6 @@
 package pl.patrykzygo.todo.ui.task_list
 
+        import android.app.AlertDialog
         import android.os.Bundle
                 import android.view.*
                 import androidx.fragment.app.Fragment
@@ -26,7 +27,11 @@ package pl.patrykzygo.todo.ui.task_list
                 binding.viewModel = listViewModel
                 val adapter =
                     TasksListAdapter(TasksListAdapter.OnClickListener { task, view ->
-                        view.findNavController().navigate(TasksListFragmentDirections.actionTasksListFragmentToTaskDetailsFragment(task.taskId))
+                        if (task != null) {
+                            view.findNavController().navigate(TasksListFragmentDirections.actionTasksListFragmentToTaskDetailsFragment(task.taskId))
+                        }else{
+                            Snackbar.make(view, "There is no task to go to", Snackbar.LENGTH_LONG).show()
+                        }
                     })
                 binding.tasksRecycler.adapter = adapter
                 binding.tasksRecycler.addItemDecoration(DividerItemDecoration(binding.tasksRecycler.context, DividerItemDecoration.VERTICAL))
