@@ -33,6 +33,10 @@ class AddTaskViewModel(application: Application) : AndroidViewModel(application)
     val time: LiveData<Calendar>
         get() = _time
 
+    private val _priority = MutableLiveData<Int>()
+    val priority: LiveData<Int>
+        get() = _priority
+
 
 
     fun formatIntoTimestamp(date: String, time: String, cycle: String): Timestamp {
@@ -81,6 +85,10 @@ class AddTaskViewModel(application: Application) : AndroidViewModel(application)
 
     fun setCycle(cycle: String){
         _cycle.value = cycle
+    }
+
+    fun setPriority(priority: Int){
+        _priority.value = priority
     }
 
     fun setTime(time: Calendar) {

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.NumberPicker
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -118,7 +119,9 @@ class AddTaskFragment : Fragment() {
         binding.taskDateEditText.setOnClickListener { showDatePickerDialog(it) }
         binding.taskTimeEditText.setOnClickListener { showTimePickerDialog(it) }
         binding.taskCycleEditText.setOnClickListener {showCycleAlertDialog(it)}
+        binding.taskPriorityEditText.setOnClickListener { showPriorityPickerDialog(it) }
     }
+
 
     private fun showCycleAlertDialog(it: View) {
         TaskCycleAlertDialog().show(childFragmentManager, "cycleAlertDialog")
@@ -131,6 +134,10 @@ class AddTaskFragment : Fragment() {
 
         viewModel.time.observe(viewLifecycleOwner, Observer {
             setDateAndTimeValues(binding.taskTimeEditText, it, "HH:mm")
+        })
+
+        viewModel.priority.observe(viewLifecycleOwner, Observer {
+            binding.taskPriorityEditText.setText(it.toString())
         })
 
         viewModel.cycle.observe(viewLifecycleOwner, Observer {
@@ -152,6 +159,10 @@ class AddTaskFragment : Fragment() {
 
     private fun showDatePickerDialog(v: View) {
         DatePickerFragment().show(childFragmentManager, "datePicker")
+    }
+
+    private fun showPriorityPickerDialog(view: View) {
+        PriorityPickerFragment().show(childFragmentManager, "priorityPicker")
     }
 
 
