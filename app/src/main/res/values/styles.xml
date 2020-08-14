@@ -8,6 +8,17 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="toolbarStyle">@style/CustomToolBarStyle</item>
         <item name="drawerArrowStyle">@style/DrawerStyle</item>
+        <item name="colorNavigationItem">@color/menu_item_color_state</item>
+        <item name="colorNavigationItemSelected">@color/colorWhite</item>
+        <item name="drawableNavigationItemBackground">@drawable/menu_background_color_state</item>
+    </style>
+    <style name="Widget.Custom.NavigationView" parent="Widget.Design.NavigationView">
+        <item name="itemIconTint">?attr/colorNavigationItem</item>
+        <item name="itemTextColor">?attr/colorNavigationItem</item>
+        <item name="itemBackground">?attr/drawableNavigationItemBackground</item>
+    </style>
+    <style name="TransparentView">
+        <item name="background">@android:color/transparent</item>
     </style>
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
     <style name="CustomToolBarStyle" parent="@style/Widget.AppCompat.Toolbar">
