@@ -1,5 +1,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="pl.patrykzygo.todo.ui.MainActivity" >
+    tools:context="pl.patrykzygo.todo.ui.MainActivity">
+
+    <group android:checkableBehavior="single">
+        <item android:title="TODO"/>
+        <item android:title="TODO"/>
+        <item android:title="TODO"/>
+        <item android:title="TODO"/>
+        <item android:title="TODO"/>
+    </group>
+    <item android:title="TODO">
+        <menu>
+            <item android:title="TODO"/>
+            <item android:title="TODO"/>
+            <item android:title="TODO"/>
+        </menu>
+    </item>
 </menu>

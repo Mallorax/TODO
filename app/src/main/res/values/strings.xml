@@ -27,4 +27,6 @@
     <string name="priority_level_label">Priority level:</string>
     <string name="notification_type_label">Notification type:</string>
     <string name="text_delete">delete</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>

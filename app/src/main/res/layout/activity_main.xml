@@ -41,7 +41,9 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
+            android:clipToPadding="false"
             style="@style/DrawerStyle"
+            app:menu="@menu/menu_main"
             />
 
 
