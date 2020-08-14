@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import pl.patrykzygo.todo.databinding.TaskListItemBinding
 import pl.patrykzygo.todo.domain.Task
 
-class TasksListAdapter(private val onClickListener: OnClickListener): PagedListAdapter<Task, TasksListAdapter.TaskViewHolder>(
-    DiffCallback
-) {
+class TasksListAdapter(private val onClickListener: OnClickListener,
+                       private val onLongClickListener: OnLongClickListener)
+    : PagedListAdapter<Task, TasksListAdapter.TaskViewHolder>(DiffCallback) {
 
 
 
@@ -24,6 +24,7 @@ class TasksListAdapter(private val onClickListener: OnClickListener): PagedListA
         }
     }
 
+
     companion object DiffCallback: DiffUtil.ItemCallback<Task>(){
         override fun areItemsTheSame(oldItem: Task, newItem: Task): Boolean {
             return oldItem === newItem
@@ -32,6 +33,7 @@ class TasksListAdapter(private val onClickListener: OnClickListener): PagedListA
         override fun areContentsTheSame(oldItem: Task, newItem: Task): Boolean {
             return oldItem == newItem
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
@@ -47,10 +49,19 @@ class TasksListAdapter(private val onClickListener: OnClickListener): PagedListA
         holder.itemView.setOnClickListener{
             onClickListener.onClick(task, holder.itemView)
         }
+        holder.itemView.setOnLongClickListener{
+            onLongClickListener.onLongClick(task, holder.itemView)
+        }
         holder.bind(task)
     }
 
     class OnClickListener(val clickListener: (task: Task?, v: View) -> Unit){
         fun onClick(task: Task?, view: View) = clickListener(task, view)
     }
+
+    class OnLongClickListener(val longClickListener: (Task?, View) -> Boolean){
+        fun onLongClick(task: Task?, view: View): Boolean = longClickListener(task, view)
+    }
+
+
 }

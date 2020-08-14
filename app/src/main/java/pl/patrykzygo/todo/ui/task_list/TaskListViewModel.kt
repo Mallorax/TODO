@@ -24,7 +24,11 @@ class TaskListViewModel(application: Application): AndroidViewModel(application)
     //TODO it's temporary shortcut for testing should move it to repo later
     val allTasks = tasksRepo.getAllTasksPaging()
 
-
+    fun deleteTask(task: Task){
+        viewModelScope.launch {
+            tasksRepo.deleteSpecificTasks(task)
+        }
+    }
 
 
     override fun onCleared() {
